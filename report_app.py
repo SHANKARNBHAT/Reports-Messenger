@@ -25,12 +25,11 @@ reports = {
 def trigger_github_workflow():
     try:
         token = st.secrets["GITHUB_TOKEN"]
-        owner = st.secrets "SHANKARNBHAT"
-        repo = st.secrets "Reports-Messenger" 
+        owner = "SHANKARNBHAT"
+        repo = "Reports-Messenger"
     except Exception:
-        st.sidebar.error("⚠️ GitHub secrets (GITHUB_TOKEN, REPO_OWNER, REPO_NAME) are not configured in Streamlit secrets.")
+        st.sidebar.error("⚠️ GITHUB_TOKEN is not configured in Streamlit secrets.")
         return False
-
     url = f"https://api.github.com/repos/{owner}/{repo}/actions/workflows/pipeline.yml/dispatches"
     
     headers = {
