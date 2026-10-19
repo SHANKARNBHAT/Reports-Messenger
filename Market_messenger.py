@@ -53,7 +53,7 @@ def initialize_database():
     """
     )
 
-    # Signal history table for 1-week tracking
+    # Signal history table for tracking
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS strategy_signal_history (
@@ -343,9 +343,12 @@ def run_strategy_scans_and_reports():
 
     conn.commit()
 
-    # --- 1-WEEK ROLLING WINDOW (Last 7 Days) ---
+    # --- TIME WINDOWS ---
     seven_days_ago = (
         datetime.datetime.now() - datetime.timedelta(days=7)
+    ).strftime("%Y-%m-%d")
+    fourteen_days_ago = (
+        datetime.datetime.now() - datetime.timedelta(days=14)
     ).strftime("%Y-%m-%d")
 
     active_df = pd.read_sql_query(
@@ -358,7 +361,7 @@ def run_strategy_scans_and_reports():
         conn,
     )
 
-    # Calculate Trend field based on SMA hierarchy
+    # Calculate Trend field based on SMA 8 > SMA 20 > SMA 50 hierarchy
     def compute_trend(row):
         s8, s20, s50 = row['sma_8'], row['sma_20'], row['sma_50']
         if pd.notna(s8) and pd.notna(s20) and pd.notna(s50):
@@ -370,11 +373,22 @@ def run_strategy_scans_and_reports():
 
     active_df['trend'] = active_df.apply(compute_trend, axis=1)
 
+    # 7-day history for individual bullish/bearish reports
     history_df = pd.read_sql_query(
         f"""
         SELECT symbol, signal_date, strategy_type, bias, close, lot_size 
         FROM strategy_signal_history 
         WHERE signal_date >= '{seven_days_ago}'
+    """,
+        conn,
+    )
+
+    # 14-day history for Consolidated and Stocks to Watch reports
+    fourteen_day_history_df = pd.read_sql_query(
+        f"""
+        SELECT symbol, signal_date, strategy_type, bias, close, lot_size 
+        FROM strategy_signal_history 
+        WHERE signal_date >= '{fourteen_days_ago}'
     """,
         conn,
     )
@@ -441,34 +455,46 @@ def run_strategy_scans_and_reports():
             else "No stocks found with RVOL > 1.0."
         )
 
+    # --- Consolidated Report (14-Day Window) ---
+    bullish_14d_records = (
+        fourteen_day_history_df[fourteen_day_history_df["bias"] == "BULLISH"]
+        if not fourteen_day_history_df.empty
+        else pd.DataFrame()
+    )
+    bearish_14d_records = (
+        fourteen_day_history_df[fourteen_day_history_df["bias"] == "BEARISH"]
+        if not fourteen_day_history_df.empty
+        else pd.DataFrame()
+    )
+
     bullish_overlap = (
         set(
-            bullish_records[bullish_records["strategy_type"] == "SMA_Hierarchy"][
+            bullish_14d_records[bullish_14d_records["strategy_type"] == "SMA_Hierarchy"][
                 "symbol"
             ]
         ).intersection(
             set(
-                bullish_records[bullish_records["strategy_type"] == "RSI_Strategy"][
+                bullish_14d_records[bullish_14d_records["strategy_type"] == "RSI_Strategy"][
                     "symbol"
                 ]
             )
         )
-        if not bullish_records.empty
+        if not bullish_14d_records.empty
         else set()
     )
     bearish_overlap = (
         set(
-            bearish_records[bearish_records["strategy_type"] == "SMA_Hierarchy"][
+            bearish_14d_records[bearish_14d_records["strategy_type"] == "SMA_Hierarchy"][
                 "symbol"
             ]
         ).intersection(
             set(
-                bearish_records[bearish_records["strategy_type"] == "RSI_Strategy"][
+                bearish_14d_records[bearish_14d_records["strategy_type"] == "RSI_Strategy"][
                     "symbol"
                 ]
             )
         )
-        if not bearish_records.empty
+        if not bearish_14d_records.empty
         else set()
     )
     active_symbols = set(active_df[active_df["is_active"] == 1]["symbol"].str.upper())
@@ -478,17 +504,17 @@ def run_strategy_scans_and_reports():
     )
     with open(consolidated_path, "w", encoding="utf-8") as f:
         f.write("==================================================\n")
-        f.write(" 🎯 CONSOLIDATED MARKET INTELLIGENCE REPORT (1-WEEK WINDOW)\n")
+        f.write(" 🎯 CONSOLIDATED MARKET INTELLIGENCE REPORT (2-WEEK WINDOW)\n")
         f.write(
             f" Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
         )
         f.write("==================================================\n\n")
 
-        f.write("【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA + RSI in Last 7D) 】\n")
+        f.write("【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA + RSI in Last 14D) 】\n")
         if bullish_overlap:
             for sym in sorted(bullish_overlap):
-                sample_row = bullish_records[
-                    bullish_records["symbol"] == sym
+                sample_row = bullish_14d_records[
+                    bullish_14d_records["symbol"] == sym
                 ].iloc[0]
                 is_act = "⚡ ACTIVE" if sym in active_symbols else ""
                 f.write(
@@ -496,14 +522,14 @@ def run_strategy_scans_and_reports():
                 )
         else:
             f.write(
-                "No multi-strategy overlapping bullish stocks found in the past week.\n"
+                "No multi-strategy overlapping bullish stocks found in the past 2 weeks.\n"
             )
 
-        f.write("\n【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA + RSI in Last 7D) 】\n")
+        f.write("\n【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA + RSI in Last 14D) 】\n")
         if bearish_overlap:
             for sym in sorted(bearish_overlap):
-                sample_row = bearish_records[
-                    bearish_records["symbol"] == sym
+                sample_row = bearish_14d_records[
+                    bearish_14d_records["symbol"] == sym
                 ].iloc[0]
                 is_act = "⚡ ACTIVE" if sym in active_symbols else ""
                 f.write(
@@ -511,14 +537,14 @@ def run_strategy_scans_and_reports():
                 )
         else:
             f.write(
-                "No multi-strategy overlapping bearish stocks found in the past week.\n"
+                "No multi-strategy overlapping bearish stocks found in the past 2 weeks.\n"
             )
 
         f.write("\n--------------------------------------------------\n")
-        f.write("📋 FULL 7-DAY SIGNAL LOG:\n")
-        if not history_df.empty:
+        f.write("📋 FULL 14-DAY SIGNAL LOG:\n")
+        if not fourteen_day_history_df.empty:
             f.write(
-                history_df[
+                fourteen_day_history_df[
                     [
                         "symbol",
                         "signal_date",
@@ -531,17 +557,18 @@ def run_strategy_scans_and_reports():
         else:
             f.write("No entries logged yet.")
 
+    # --- Stocks to Watch Report (14-Day Window) ---
     active_rvol_df = active_df[active_df["rvol"] > 1.0]
     active_rvol_symbols = set(
         active_rvol_symbol.upper()
         for active_rvol_symbol in active_rvol_df["symbol"].tolist()
     )
-    signal_symbols = (
-        set(history_df["symbol"].str.upper().tolist())
-        if not history_df.empty
+    watchlist_signal_symbols = (
+        set(fourteen_day_history_df["symbol"].str.upper().tolist())
+        if not fourteen_day_history_df.empty
         else set()
     )
-    common_rvol_symbols = signal_symbols.intersection(active_rvol_symbols)
+    common_rvol_symbols = watchlist_signal_symbols.intersection(active_rvol_symbols)
 
     rvol_report_lines = [
         "==================================================",
@@ -554,13 +581,13 @@ def run_strategy_scans_and_reports():
         "• High RVOL (> 1.5) often highlights institutional participation, breakouts, or major news.",
         "",
         "REPORT CRITERIA:",
-        "• Cross-references past 7-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.",
+        "• Cross-references past 14-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.",
         "--------------------------------------------------\n",
     ]
 
-    if common_rvol_symbols and not history_df.empty:
+    if common_rvol_symbols and not fourteen_day_history_df.empty:
         rvol_report_lines.append(
-            f"Found {len(common_rvol_symbols)} stock(s) from weekly log active with RVOL > 1 today:\n"
+            f"Found {len(common_rvol_symbols)} stock(s) from 14-day signal log active with RVOL > 1 today:\n"
         )
         rvol_report_lines.append(
             f"{'Symbol':<12} {'Strategy':<16} {'Bias':<10} {'Lot Size':<10} {'RVOL':<8} {'Turnover(Cr)':<14} {'Close':<10}"
@@ -568,8 +595,8 @@ def run_strategy_scans_and_reports():
         rvol_report_lines.append("-" * 84)
 
         for sym in sorted(common_rvol_symbols):
-            sym_signals = history_df[
-                history_df["symbol"].str.upper() == sym
+            sym_signals = fourteen_day_history_df[
+                fourteen_day_history_df["symbol"].str.upper() == sym
             ].sort_values(by="signal_date", ascending=False)
             latest_sig = sym_signals.iloc[0]
             active_match = active_rvol_df[
@@ -587,7 +614,7 @@ def run_strategy_scans_and_reports():
             )
     else:
         rvol_report_lines.append(
-            "ℹ️ No stocks from weekly signal log match the RVOL > 1 active list filter today."
+            "ℹ️ No stocks from 14-day signal log match the RVOL > 1 active list filter today."
         )
 
     rvol_report_path = os.path.join(
