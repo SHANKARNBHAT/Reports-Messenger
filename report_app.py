@@ -24,9 +24,9 @@ reports = {
 # --- Workflow Trigger Function ---
 def trigger_github_workflow():
     try:
-        token = st.secrets["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"]
-        owner = st.secrets["SHANKARNBHAT"]
-        repo = st.secrets["Reports-Messenger"]
+        token = st.secrets["GITHUB_TOKEN"]
+        owner = st.secrets "SHANKARNBHAT"
+        repo = st.secrets "Reports-Messenger" 
     except Exception:
         st.sidebar.error("⚠️ GitHub secrets (GITHUB_TOKEN, REPO_OWNER, REPO_NAME) are not configured in Streamlit secrets.")
         return False
