@@ -33,9 +33,8 @@ def trigger_github_workflow():
         return False
 
     url = f"https://api.github.com/repos/{owner}/{repo}/actions/workflows/pipeline.yml/dispatches"
-    
     headers = {
-        "Authorization": f"Bearer {token}",
+        "Authorization": f"Bearer {st.secrets['GITHUB_TOKEN'].strip()}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28"
     }
