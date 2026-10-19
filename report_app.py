@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 import streamlit as st
 
@@ -35,7 +36,7 @@ def trigger_github_workflow():
 
   url = f"https://api.github.com/repos/{owner}/{repo}/actions/workflows/pipeline.yml/dispatches"
   headers = {
-      "Authorization": f"Bearer {st.secrets['GITHUB_TOKEN'].strip()}",
+      "Authorization": f"Bearer {token}",
       "Accept": "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
   }
@@ -49,6 +50,39 @@ def trigger_github_workflow():
   else:
     st.sidebar.error(f"Failed to trigger workflow: {response.text}")
     return False
+
+
+# --- Direct GitHub Raw Content Loader (Bypasses Container Cache) ---
+def load_report_text(filename):
+  owner = "SHANKARNBHAT"
+  repo = "Reports-Messenger"
+  branch = "main"  # Replace with 'master' if your default branch is 'master'
+
+  raw_url = (
+      f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{filename}"
+  )
+
+  try:
+    # Adding a timestamp query parameter forces real-time fetching from GitHub
+    timestamp = int(time.time())
+    response = requests.get(
+        raw_url, params={"_cache_bust": timestamp}, timeout=5
+    )
+
+    if response.status_code == 200:
+      return response.text
+  except Exception:
+    pass
+
+  # Fallback to local file read if network fetch fails
+  if os.path.exists(filename):
+    with open(filename, "r", encoding="utf-8") as f:
+      return f.read()
+
+  return (
+      f"⚠️ Report file '{filename}' not found on GitHub. Click 'Run Workflow"
+      " Now' in the sidebar to generate reports."
+  )
 
 
 # --- Sidebar Controls ---
@@ -68,26 +102,11 @@ if st.sidebar.button("🚀 Run Workflow Now"):
 
 st.sidebar.divider()
 
-# --- Refresh Button to Pull Latest Report Files ---
+# --- Refresh Button ---
 if st.sidebar.button("🔄 Refresh Reports"):
-  st.cache_data.clear()
   st.rerun()
 
-st.sidebar.markdown("Reports load automatically from the latest saved state.")
-
-
-# --- Load Report Function with Caching ---
-@st.cache_data
-def load_report_text(filename):
-  """Safely loads existing text report files."""
-  if os.path.exists(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-      return f.read()
-  return (
-      f"⚠️ Report file '{filename}' not found yet. Click 'Run Workflow Now' in"
-      " the sidebar to populate this report."
-  )
-
+st.sidebar.markdown("Reports fetch real-time data directly from your repository.")
 
 # --- Create Navigation Tabs ---
 tabs = st.tabs(list(reports.keys()))
@@ -97,5 +116,5 @@ for tab, (report_name, filename) in zip(tabs, reports.items()):
   with tab:
     st.subheader(report_name)
     report_content = load_report_text(filename)
-    # Using st.code preserves table spacing and column alignments nicely
+    # Using st.code preserves table spacing and column alignments
     st.code(report_content, language="text")
