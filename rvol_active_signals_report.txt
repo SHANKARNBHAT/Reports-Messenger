@@ -1,6 +1,6 @@
 ==================================================
  👁️ STOCKS TO WATCH
- Generated on: 2026-10-19 17:35:12
+ Generated on: 2026-10-19 17:59:11
 ==================================================
 WHAT IS RVOL (RELATIVE VOLUME)?
 • Relative Volume (RVOL) compares today's trading volume against its historical
@@ -8,10 +8,10 @@ WHAT IS RVOL (RELATIVE VOLUME)?
 • High RVOL (> 1.5) often highlights institutional participation, breakouts, or major news.
 
 REPORT CRITERIA:
-• Cross-references past 7-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.
+• Cross-references past 14-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.
 --------------------------------------------------
 
-Found 1 stock(s) from weekly log active with RVOL > 1 today:
+Found 1 stock(s) from 14-day signal log active with RVOL > 1 today:
 
 Symbol       Strategy         Bias       Lot Size   RVOL     Turnover(Cr)   Close     
 ------------------------------------------------------------------------------------

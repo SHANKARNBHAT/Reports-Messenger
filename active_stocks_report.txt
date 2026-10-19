@@ -1,6 +1,6 @@
 ==================================================
  ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)
- Generated on: 2026-10-19 17:35:12
+ Generated on: 2026-10-19 17:59:11
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
 • Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.
