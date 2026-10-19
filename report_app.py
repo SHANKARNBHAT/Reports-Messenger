@@ -24,12 +24,14 @@ reports = {
 # --- Workflow Trigger Function ---
 def trigger_github_workflow():
     try:
-        token = st.secrets["GITHUB_TOKEN"]
+        # .strip() automatically removes any hidden newlines or spaces from secrets
+        token = st.secrets["GITHUB_TOKEN"].strip()
         owner = "SHANKARNBHAT"
         repo = "Reports-Messenger"
     except Exception:
         st.sidebar.error("⚠️ GITHUB_TOKEN is not configured in Streamlit secrets.")
         return False
+
     url = f"https://api.github.com/repos/{owner}/{repo}/actions/workflows/pipeline.yml/dispatches"
     
     headers = {
