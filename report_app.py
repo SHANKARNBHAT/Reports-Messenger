@@ -58,28 +58,29 @@ df = load_data()
 # --- Deduplicate Columns to Prevent PyArrow Errors ---
 df = df.loc[:, ~df.columns.duplicated()]
 
-# --- Normalize Column Names (Safeguard) ---
+# --- Intelligent Column Mapping ---
 column_mapping = {}
 for col in df.columns:
-    col_lower = str(col).lower()
-    if 'symbol' in col_lower or 'stock' in col_lower:
+    c_lower = str(col).strip().lower().replace(" ", "_")
+    if any(k in c_lower for k in ['symbol', 'stock', 'ticker', 'instrument']):
         column_mapping[col] = 'Symbol'
-    elif 'price' in col_lower and ('chg' in col_lower or 'change' in col_lower):
+    elif any(k in c_lower for k in ['price_chg', 'price_change', 'chg_%', 'change_%', 'price_%']) or ('price' in c_lower and 'chg' in c_lower):
         column_mapping[col] = 'Price_Chg_%'
-    elif 'oi' in col_lower and ('chg' in col_lower or 'change' in col_lower):
+    elif any(k in c_lower for k in ['oi_chg', 'oi_change', 'open_interest', 'openinterest']) or ('oi' in c_lower and 'chg' in c_lower):
         column_mapping[col] = 'OI_Chg_%'
-    elif 'vol' in col_lower:
+    elif any(k in c_lower for k in ['vol', 'volume', 'qty', 'quantity']):
         column_mapping[col] = 'Volume'
 
 df = df.rename(columns=column_mapping)
-
-# Re-check duplicates after renaming
 df = df.loc[:, ~df.columns.duplicated()]
 
 # --- Validation and Rendering ---
 required_cols = {'Symbol', 'Price_Chg_%', 'OI_Chg_%', 'Volume'}
-if not required_cols.issubset(df.columns):
-    st.warning("⚠️ Column names in your database/CSV don't match the standard F&O template. Here is your raw data preview:")
+missing_cols = required_cols - set(df.columns)
+
+if missing_cols:
+    st.info(f"ℹ️ Detected columns in your file: {list(df.columns)}")
+    st.warning(f"⚠️ Missing expected template columns: {list(missing_cols)}. Showing raw data preview below:")
     st.dataframe(df, use_container_width=True)
 else:
     # Classify Buildup Regimes
