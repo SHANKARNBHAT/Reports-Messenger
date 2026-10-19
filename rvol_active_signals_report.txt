@@ -1,7 +1,15 @@
 ==================================================
  🔍 WEEKLY SIGNALS MATCHED WITH ACTIVE STOCKS (RVOL > 1)
- Generated on: 2026-10-19 14:25:21
+ Generated on: 2026-10-19 15:02:30
 ==================================================
+WHAT IS RVOL (RELATIVE VOLUME)?
+• Relative Volume (RVOL) compares today's trading volume against its historical
+  average (e.g., 20-day average). An RVOL > 1.0 means trading volume is higher than normal.
+• High RVOL (> 1.5) often highlights institutional participation, breakouts, or major news.
+
+REPORT CRITERIA:
+• Cross-references past 7-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.
+--------------------------------------------------
 
 Found 1 stock(s) from weekly log active with RVOL > 1 today:
 
