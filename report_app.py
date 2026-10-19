@@ -24,7 +24,7 @@ reports = {
 # --- Workflow Trigger Function ---
 def trigger_github_workflow():
     try:
-        token = st.secrets["GITHUB_TOKEN"]
+        token = st.secrets["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"]
         owner = st.secrets["SHANKARNBHAT"]
         repo = st.secrets["Reports-Messenger"]
     except Exception:
