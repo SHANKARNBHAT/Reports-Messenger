@@ -412,8 +412,14 @@ def run_strategy_scans_and_reports():
             else "No bearish records in past 7 days."
         )
 
-    # --- Active Stocks Report with Criteria Description ---
-    active_top25 = active_df[['symbol', 'trend', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active']].head(25)
+    # --- Active Stocks Report: Trend grouped together and moved to the last column ---
+    active_top25 = active_df[['symbol', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active', 'trend']].head(25)
+    
+    # Group stocks by trend: Bullish first, then Sideways, then Bearish
+    trend_order = {'Bullish': 1, 'Sideways': 2, 'Bearish': 3}
+    active_top25['trend_rank'] = active_top25['trend'].map(trend_order)
+    active_top25 = active_top25.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
+
     with open(
         os.path.join(SCRIPT_DIR, "active_stocks_report.txt"), "w", encoding="utf-8"
     ) as f:
@@ -424,10 +430,10 @@ def run_strategy_scans_and_reports():
         f.write("REPORT CRITERIA & DESCRIPTION:\n")
         f.write("• Tracks the top 25 NSE futures stocks ranked by highest Relative Volume (RVOL).\n")
         f.write("• Filter Criteria: Evaluates high market participation based on RVOL and Turnover.\n")
-        f.write("• Trend Classification:\n")
+        f.write("• Grouped & Ordered by Trend:\n")
         f.write("   - Bullish : SMA 8 > SMA 20 > SMA 50\n")
-        f.write("   - Bearish : SMA 8 < SMA 20 < SMA 50\n")
         f.write("   - Sideways: Any other moving average alignment\n")
+        f.write("   - Bearish : SMA 8 < SMA 20 < SMA 50\n")
         f.write("--------------------------------------------------\n\n")
         f.write(active_top25.to_string(index=False))
 
@@ -533,7 +539,6 @@ def run_strategy_scans_and_reports():
     )
     common_rvol_symbols = signal_symbols.intersection(active_rvol_symbols)
 
-    # --- RVOL Active Signals Report with Beginner-Friendly Description ---
     rvol_report_lines = [
         "==================================================",
         " 🔍 WEEKLY SIGNALS MATCHED WITH ACTIVE STOCKS (RVOL > 1)",
