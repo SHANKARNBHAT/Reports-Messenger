@@ -25,8 +25,8 @@ reports = {
 def trigger_github_workflow():
     try:
         token = st.secrets["GITHUB_TOKEN"]
-        owner = st.secrets["REPO_OWNER"]
-        repo = st.secrets["REPO_NAME"]
+        owner = st.secrets["SHANKARNBHAT"]
+        repo = st.secrets["Reports-Messenger"]
     except Exception:
         st.sidebar.error("⚠️ GitHub secrets (GITHUB_TOKEN, REPO_OWNER, REPO_NAME) are not configured in Streamlit secrets.")
         return False
