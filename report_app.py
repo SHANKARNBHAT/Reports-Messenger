@@ -4,11 +4,15 @@ import plotly.express as px
 import os
 import sqlite3
 
-# Set page layout
-st.set_page_config(page_title="NSE Futures Analytics", layout="wide")
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="NSE Futures Analytics",
+    page_icon="📈",
+    layout="wide"
+)
 
 st.title("📈 NSE Stock Futures - Buildup & Analysis Dashboard")
-st.markdown("Connected to your GitHub repository data (`stock_market_data.db` & `futures stocks.csv`)")
+st.markdown("Automated market insights powered by your GitHub pipeline (`stock_market_data.db` & `futures stocks.csv`).")
 
 # --- Data Loading Function ---
 @st.cache_data(ttl=300)
@@ -17,7 +21,6 @@ def load_data():
     if os.path.exists("stock_market_data.db"):
         try:
             conn = sqlite3.connect("stock_market_data.db")
-            # Automatically find available tables in the database
             cursor = conn.cursor()
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
             tables = cursor.fetchall()
@@ -26,7 +29,8 @@ def load_data():
                 table_name = tables[0][0]  # Take the first table found
                 df = pd.read_sql(f"SELECT * FROM {table_name}", conn)
                 conn.close()
-                return df
+                if not df.empty:
+                    return df
             conn.close()
         except Exception as e:
             st.warning(f"Could not read from stock_market_data.db: {e}")
@@ -34,11 +38,13 @@ def load_data():
     # 2. Fallback to your CSV file: futures stocks.csv
     if os.path.exists("futures stocks.csv"):
         try:
-            return pd.read_csv("futures stocks.csv")
+            df = pd.read_csv("futures stocks.csv")
+            if not df.empty:
+                return df
         except Exception as e:
             st.warning(f"Could not read from futures stocks.csv: {e}")
 
-    # 3. Fallback Mock Data (if files are empty)
+    # 3. Fallback Mock Data (if files are missing or empty)
     data = {
         'Symbol': ['RELIANCE', 'TCS', 'INFY', 'HDFCBANK', 'ICICIBANK', 'TATAMOTORS', 'SBIN', 'LT'],
         'Price_Chg_%': [1.2, -0.8, -1.5, 0.9, -0.3, 2.4, -1.1, 0.4],
@@ -49,11 +55,13 @@ def load_data():
 
 df = load_data()
 
-# Ensure standard column names exist (safeguard against naming discrepancies)
-# Maps common variations of column names if needed
+# --- Deduplicate Columns to Prevent PyArrow Errors ---
+df = df.loc[:, ~df.columns.duplicated()]
+
+# --- Normalize Column Names (Safeguard) ---
 column_mapping = {}
 for col in df.columns:
-    col_lower = col.lower()
+    col_lower = str(col).lower()
     if 'symbol' in col_lower or 'stock' in col_lower:
         column_mapping[col] = 'Symbol'
     elif 'price' in col_lower and ('chg' in col_lower or 'change' in col_lower):
@@ -65,24 +73,26 @@ for col in df.columns:
 
 df = df.rename(columns=column_mapping)
 
-# Check if required columns are present, else show raw data viewer
+# Re-check duplicates after renaming
+df = df.loc[:, ~df.columns.duplicated()]
+
+# --- Validation and Rendering ---
 required_cols = {'Symbol', 'Price_Chg_%', 'OI_Chg_%', 'Volume'}
 if not required_cols.issubset(df.columns):
     st.warning("⚠️ Column names in your database/CSV don't match the standard F&O template. Here is your raw data preview:")
     st.dataframe(df, use_container_width=True)
-    # Remove duplicate columns if any exist
-    df = df.loc[:, ~df.columns.duplicated()]
-
-# Then display the dataframe safely
-st.dataframe(df, use_container_width=True)
 else:
     # Classify Buildup Regimes
     def categorize(row):
         p, oi = row['Price_Chg_%'], row['OI_Chg_%']
-        if p > 0 and oi > 0: return 'Long Buildup'
-        elif p < 0 and oi > 0: return 'Short Buildup'
-        elif p < 0 and oi < 0: return 'Long Unwinding'
-        else: return 'Short Covering'
+        if p > 0 and oi > 0: 
+            return 'Long Buildup'
+        elif p < 0 and oi > 0: 
+            return 'Short Buildup'
+        elif p < 0 and oi < 0: 
+            return 'Long Unwinding'
+        else: 
+            return 'Short Covering'
 
     df['Buildup'] = df.apply(categorize, axis=1)
 
