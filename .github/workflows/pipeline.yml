@@ -2,9 +2,8 @@ name: Daily Market Pipeline
 
 on:
   schedule:
-    # Runs Monday to Friday at 4:00 PM IST (10:30 UTC)
     - cron: '30 10 * * 1-5'
-  workflow_dispatch: # Allows you to run it manually anytime from GitHub UI
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
@@ -23,12 +22,11 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install pandas numpy yfinance requests
 
     - name: Run Market Pipeline
       env:
-        TELEGRAM_BOT_TOKEN = "8621913930:AAFxwb_l7Fti6WOW_HfQjc0hyx7LKU9HY-I"
-        TELEGRAM_CHAT_ID = "7605066005"
-
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python main.py  # Replace main.py with your actual script filename
+        python Market_messenger.py
