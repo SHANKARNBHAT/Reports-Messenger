@@ -2,7 +2,7 @@ name: Market Pipeline & Report Messenger
 
 on:
   schedule:
-    - cron: '30 9 * * 1-5' # Runs every weekday at market hours
+    - cron: '30 11 * * *' # Runs daily at 5:00 PM IST (11:30 UTC)
   workflow_dispatch:
 
 permissions:
