@@ -1,0 +1,16 @@
+==================================================
+ 🎯 CONSOLIDATED MARKET INTELLIGENCE REPORT (1-WEEK WINDOW)
+ Generated on: 2026-10-19 14:25:21
+==================================================
+
+【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA + RSI in Last 7D) 】
+No multi-strategy overlapping bullish stocks found in the past week.
+
+【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA + RSI in Last 7D) 】
+No multi-strategy overlapping bearish stocks found in the past week.
+
+--------------------------------------------------
+📋 FULL 7-DAY SIGNAL LOG:
+symbol signal_date strategy_type    bias  lot_size
+   KEI  2026-10-19 SMA_Hierarchy BEARISH       175
+   PNB  2026-10-19  RSI_Strategy BULLISH         1

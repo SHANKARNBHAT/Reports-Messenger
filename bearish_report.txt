@@ -1,0 +1,4 @@
+=== BEARISH REPORT (Last 7 Days) ===
+
+symbol signal_date strategy_type    bias       close  lot_size
+   KEI  2026-10-19 SMA_Hierarchy BEARISH 4450.799805       175

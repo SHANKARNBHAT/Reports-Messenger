@@ -1,0 +1,4 @@
+=== BULLISH REPORT (Last 7 Days) ===
+
+symbol signal_date strategy_type    bias      close  lot_size
+   PNB  2026-10-19  RSI_Strategy BULLISH 121.879997         1
