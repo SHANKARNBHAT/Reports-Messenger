@@ -412,30 +412,34 @@ def run_strategy_scans_and_reports():
             else "No bearish records in past 7 days."
         )
 
-    # --- Active Stocks Report: Trend grouped together and moved to the last column ---
-    active_top25 = active_df[['symbol', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active', 'trend']].head(25)
+    # --- Active Stocks Report: All RVOL > 1.0, ordered Bullish, Bearish, Sideways ---
+    active_rvol_all = active_df[active_df['rvol'] > 1.0][['symbol', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active', 'trend']].copy()
     
-    # Group stocks by trend: Bullish first, then Sideways, then Bearish
-    trend_order = {'Bullish': 1, 'Sideways': 2, 'Bearish': 3}
-    active_top25['trend_rank'] = active_top25['trend'].map(trend_order)
-    active_top25 = active_top25.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
+    # Group stocks by trend: Bullish first (1), Bearish second (2), Sideways last (3)
+    trend_order = {'Bullish': 1, 'Bearish': 2, 'Sideways': 3}
+    active_rvol_all['trend_rank'] = active_rvol_all['trend'].map(trend_order)
+    active_rvol_all = active_rvol_all.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
 
     with open(
         os.path.join(SCRIPT_DIR, "active_stocks_report.txt"), "w", encoding="utf-8"
     ) as f:
         f.write("==================================================\n")
-        f.write(" ⚡ TOP 25 ACTIVE STOCKS REPORT\n")
+        f.write(" ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)\n")
         f.write(f" Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("==================================================\n")
         f.write("REPORT CRITERIA & DESCRIPTION:\n")
-        f.write("• Tracks the top 25 NSE futures stocks ranked by highest Relative Volume (RVOL).\n")
+        f.write("• Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.\n")
         f.write("• Filter Criteria: Evaluates high market participation based on RVOL and Turnover.\n")
         f.write("• Grouped & Ordered by Trend:\n")
-        f.write("   - Bullish : SMA 8 > SMA 20 > SMA 50\n")
-        f.write("   - Sideways: Any other moving average alignment\n")
-        f.write("   - Bearish : SMA 8 < SMA 20 < SMA 50\n")
+        f.write("    - Bullish : SMA 8 > SMA 20 > SMA 50\n")
+        f.write("    - Bearish : SMA 8 < SMA 20 < SMA 50\n")
+        f.write("    - Sideways: Any other moving average alignment\n")
         f.write("--------------------------------------------------\n\n")
-        f.write(active_top25.to_string(index=False))
+        f.write(
+            active_rvol_all.to_string(index=False)
+            if not active_rvol_all.empty
+            else "No stocks found with RVOL > 1.0."
+        )
 
     bullish_overlap = (
         set(
@@ -541,7 +545,7 @@ def run_strategy_scans_and_reports():
 
     rvol_report_lines = [
         "==================================================",
-        " 🔍 WEEKLY SIGNALS MATCHED WITH ACTIVE STOCKS (RVOL > 1)",
+        " 👁️ STOCKS TO WATCH",
         f" Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "==================================================",
         "WHAT IS RVOL (RELATIVE VOLUME)?",
@@ -609,7 +613,7 @@ def dispatch_to_telegram():
         ),
         (
             "rvol_active_signals_report.txt",
-            "🔍 Weekly Signals Matched with Active Stocks (RVOL > 1)",
+            "👁️ Stocks to Watch",
         ),
     ]
 
@@ -619,6 +623,9 @@ def dispatch_to_telegram():
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
+
+            # Replace < and > with LT and GT to avoid Telegram HTML parser issues
+            content = content.replace(">", " GT ").replace("<", " LT ")
 
             max_len = 4000
             chunks = [
