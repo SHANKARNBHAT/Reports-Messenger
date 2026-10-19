@@ -1,39 +1,39 @@
 ==================================================
  ⚡ TOP 25 ACTIVE STOCKS REPORT
- Generated on: 2026-10-19 15:02:30
+ Generated on: 2026-10-19 15:09:15
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
 • Tracks the top 25 NSE futures stocks ranked by highest Relative Volume (RVOL).
 • Filter Criteria: Evaluates high market participation based on RVOL and Turnover.
-• Trend Classification:
+• Grouped & Ordered by Trend:
    - Bullish : SMA 8 > SMA 20 > SMA 50
-   - Bearish : SMA 8 < SMA 20 < SMA 50
    - Sideways: Any other moving average alignment
+   - Bearish : SMA 8 < SMA 20 < SMA 50
 --------------------------------------------------
 
-    symbol    trend     rvol  turnover_cr       close   volume  is_active
-       PNB Sideways 4.581999   952.128243  121.900002 78107320          1
-FEDERALBNK Sideways 3.544271  1083.842049  348.850006 31068999          1
-       UBL  Bearish 2.579740    67.167000 1204.800049   557495          1
-      SJVN  Bearish 2.136458    45.573091   51.110001  8916668          1
-   SYNGENE Sideways 2.061393    67.966498  397.500000  1709849          1
-PERSISTENT Sideways 1.997680   726.657951 5690.000000  1277079          1
-    VRLLOG  Bearish 1.941189     8.576930  286.850006   299004          0
-BANKBARODA Sideways 1.853298   324.654519  238.199997 13629493          1
-  AXISBANK Sideways 1.798037  1577.297174 1236.000000 12761304          1
-    360ONE Sideways 1.753492   179.016303 1055.000000  1696837          1
-   SBICARD  Bearish 1.658655    85.220760  567.400024  1501952          1
-      SBIN  Bearish 1.624687  1468.337282  973.700012 15079976          1
-       TCS Sideways 1.591814  2134.795228 2460.899902  8674856          1
-     CANBK  Bearish 1.583959   378.627293  122.000000 31035024          1
- HOMEFIRST  Bearish 1.541162    34.403001 1055.199951   326033          1
-     CIPLA  Bearish 1.483812   183.679546 1324.099976  1387203          0
-    M&MFIN  Bearish 1.387625    71.087708  304.899994  2331509          0
-      LTTS Sideways 1.383612    37.815006 3611.300049   104713          0
-  RATEGAIN Sideways 1.316844    25.633493  799.549988   320599          0
-   MPHASIS Sideways 1.301546   191.360000 2500.000000   765440          0
-  GRANULES  Bearish 1.282629    70.390330  806.049988   873275          0
- EICHERMOT  Bearish 1.259954   360.194332 7349.000000   490127          0
-    BIOCON  Bearish 1.222547   109.558268  340.000000  3222302          0
-BALKRISIND  Bearish 1.222211    38.761057 2071.199951   187143          0
-       SRF  Bearish 1.144364    52.338342 2432.000000   215207          0
+    symbol     rvol  turnover_cr       close   volume  is_active    trend
+       PNB 4.581999   952.128243  121.900002 78107320          1 Sideways
+FEDERALBNK 3.544271  1083.842049  348.850006 31068999          1 Sideways
+   SYNGENE 2.061393    67.966498  397.500000  1709849          1 Sideways
+PERSISTENT 1.997680   726.657951 5690.000000  1277079          1 Sideways
+BANKBARODA 1.853298   324.654519  238.199997 13629493          1 Sideways
+  AXISBANK 1.798037  1577.297174 1236.000000 12761304          1 Sideways
+    360ONE 1.753492   179.016303 1055.000000  1696837          1 Sideways
+       TCS 1.591814  2134.795228 2460.899902  8674856          1 Sideways
+      LTTS 1.383612    37.815006 3611.300049   104713          0 Sideways
+  RATEGAIN 1.316844    25.633493  799.549988   320599          0 Sideways
+   MPHASIS 1.301546   191.360000 2500.000000   765440          0 Sideways
+       UBL 2.579740    67.167000 1204.800049   557495          1  Bearish
+      SJVN 2.136458    45.573091   51.110001  8916668          1  Bearish
+    VRLLOG 1.941189     8.576930  286.850006   299004          0  Bearish
+   SBICARD 1.658655    85.220760  567.400024  1501952          1  Bearish
+      SBIN 1.624687  1468.337282  973.700012 15079976          1  Bearish
+     CANBK 1.583959   378.627293  122.000000 31035024          1  Bearish
+ HOMEFIRST 1.541162    34.403001 1055.199951   326033          1  Bearish
+     CIPLA 1.483812   183.679546 1324.099976  1387203          0  Bearish
+    M&MFIN 1.387625    71.087708  304.899994  2331509          0  Bearish
+  GRANULES 1.282629    70.390330  806.049988   873275          0  Bearish
+ EICHERMOT 1.259954   360.194332 7349.000000   490127          0  Bearish
+    BIOCON 1.222547   109.558268  340.000000  3222302          0  Bearish
+BALKRISIND 1.222211    38.761057 2071.199951   187143          0  Bearish
+       SRF 1.144364    52.338342 2432.000000   215207          0  Bearish
