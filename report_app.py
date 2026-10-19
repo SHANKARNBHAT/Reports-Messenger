@@ -25,7 +25,7 @@ reports = {
 def trigger_github_workflow():
     try:
         # .strip() automatically removes any hidden newlines or spaces from secrets
-        token = st.secrets["GITHUB_TOKEN"]
+        token = st.secrets["GITHUB_TOKEN"].strip()
         owner = "SHANKARNBHAT"
         repo = "Reports-Messenger"
     except Exception:
