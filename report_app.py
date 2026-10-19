@@ -70,6 +70,11 @@ required_cols = {'Symbol', 'Price_Chg_%', 'OI_Chg_%', 'Volume'}
 if not required_cols.issubset(df.columns):
     st.warning("⚠️ Column names in your database/CSV don't match the standard F&O template. Here is your raw data preview:")
     st.dataframe(df, use_container_width=True)
+    # Remove duplicate columns if any exist
+    df = df.loc[:, ~df.columns.duplicated()]
+
+# Then display the dataframe safely
+st.dataframe(df, use_container_width=True)
 else:
     # Classify Buildup Regimes
     def categorize(row):
