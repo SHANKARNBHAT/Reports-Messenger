@@ -314,7 +314,7 @@ def run_market_update(csv_filename="futures stocks.csv"):
                 date_str = str(row.iloc[0])[:10]
                 close_p = row.get("close")
                 if pd.isna(close_p):
-                    continue
+                    continue  # Skip if close price is missing
 
                 stock_ret = row.get("stock_return_50")
                 nifty_ret = nifty_map.get(date_str, np.nan)
@@ -376,7 +376,7 @@ def run_strategy_scans_and_reports():
 
     for symbol in symbols:
         query = """
-            SELECT date, close, sma_20, sma_50, sma_200, rsi_20, rsi_sma_20, lot_size, is_active
+            SELECT date, close, high, low, sma_20, sma_50, sma_200, rsi_20, rsi_sma_20, lot_size, is_active
             FROM stock_ohlc_indicators WHERE symbol = ? ORDER BY date ASC;
         """
         df = pd.read_sql_query(query, conn, params=(symbol,))
@@ -455,7 +455,7 @@ def run_strategy_scans_and_reports():
 
     active_df = pd.read_sql_query(
         """
-        SELECT symbol, sma_20, sma_50, sma_200, rvol, turnover_cr, close, volume, is_active, atr_14, rs_nifty 
+        SELECT symbol, sma_20, sma_50, sma_200, rvol, turnover_cr, close, volume, is_active, atr_14, high, low 
         FROM stock_ohlc_indicators 
         WHERE date = (SELECT MAX(date) FROM stock_ohlc_indicators WHERE symbol != '^NSEI') AND symbol != '^NSEI'
         ORDER BY rvol DESC
@@ -472,16 +472,26 @@ def run_strategy_scans_and_reports():
                 return 'Bearish'
         return 'Undetermined'
 
+    active_df['daily_range'] = active_df['high'] - active_df['low']
+
     def compute_action(row):
         trend = row['trend']
-        rs = row['rs_nifty']
-        if pd.isna(rs):
-            return 'Wait'
+        daily_range = row['daily_range']
+        atr_14 = row['atr_14']
+        
+        if pd.isna(daily_range) or pd.isna(atr_14):
+            return '4.Wait'
+            
+        is_expanding = daily_range > atr_14
+        
         if trend == 'Bullish':
-            return 'Long' if rs > 0 else 'Wait'
+            return '1.Long' if is_expanding else '4.Wait'
         elif trend == 'Bearish':
-            return 'Short' if rs < 0 else 'Wait'
-        return 'Wait'
+            return '2.Short' if is_expanding else '4.Wait'
+        elif trend == 'Undetermined':
+            return '3.Watch' if is_expanding else '4.Wait'
+            
+        return '4.Wait'
 
     active_df['trend'] = active_df.apply(compute_trend, axis=1)
     active_df['action'] = active_df.apply(compute_action, axis=1)
@@ -518,17 +528,16 @@ def run_strategy_scans_and_reports():
         f.write(f"{market_baseline_sentence}\n\n")
         f.write(bearish_records.to_string(index=False) if not bearish_records.empty else "No bearish records in past 7 days.")
 
-    active_rvol_all = active_df[active_df['rvol'] > 1.0][['symbol', 'rvol', 'close', 'atr_14', 'rs_nifty', 'is_active', 'trend', 'action']].copy()
+    active_rvol_all = active_df[active_df['rvol'] > 1.0][['symbol', 'rvol', 'close', 'daily_range', 'atr_14', 'is_active', 'trend', 'action']].copy()
     
     # Format columns neatly to prevent line wrapping inside Telegram code blocks
     active_rvol_all['rvol'] = active_rvol_all['rvol'].map(lambda x: f"{x:.2f}" if pd.notna(x) else "0.00")
     active_rvol_all['close'] = active_rvol_all['close'].map(lambda x: f"{x:.2f}" if pd.notna(x) else "0.00")
+    active_rvol_all['daily_range'] = active_rvol_all['daily_range'].map(lambda x: f"{x:.2f}" if pd.notna(x) else "0.00")
     active_rvol_all['atr_14'] = active_rvol_all['atr_14'].map(lambda x: f"{x:.2f}" if pd.notna(x) else "0.00")
-    active_rvol_all['rs_nifty'] = active_rvol_all['rs_nifty'].map(lambda x: f"{x:+.4f}" if pd.notna(x) else "0.0000")
 
-    trend_order = {'Bullish': 1, 'Bearish': 2, 'Undetermined': 3}
-    active_rvol_all['trend_rank'] = active_rvol_all['trend'].map(trend_order)
-    active_rvol_all = active_rvol_all.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
+    # Sort strictly by action (1.Long -> 2.Short -> 3.Watch -> 4.Wait), then by RVOL descending
+    active_rvol_all = active_rvol_all.sort_values(by=['action', 'rvol'], ascending=[True, False])
 
     with open(os.path.join(SCRIPT_DIR, "active_stocks_report.txt"), "w", encoding="utf-8") as f:
         f.write("==================================================\n")
@@ -539,10 +548,11 @@ def run_strategy_scans_and_reports():
         f.write(f"{market_baseline_sentence}\n")
         f.write("• Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.\n")
         f.write("• Action Logic:\n")
-        f.write("    - Long : Bullish Trend AND RS vs Nifty > 0\n")
-        f.write("    - Short: Bearish Trend AND RS vs Nifty < 0\n")
-        f.write("    - Wait : Trend & RS Divergence (e.g., Bearish + Positive RS)\n")
-        f.write("• Grouped & Ordered by Trend:\n")
+        f.write("    - 1.Long  : Bullish Trend AND (Daily Range > ATR 14)\n")
+        f.write("    - 2.Short : Bearish Trend AND (Daily Range > ATR 14)\n")
+        f.write("    - 3.Watch : Undetermined Trend AND (Daily Range > ATR 14)\n")
+        f.write("    - 4.Wait  : Otherwise (Daily Range <= ATR 14 / Compression)\n")
+        f.write("• Grouped & Ordered by Action (1.Long -> 2.Short -> 3.Watch -> 4.Wait):\n")
         f.write("    - Bullish     : SMA 20 > SMA 50 AND Close > SMA 200\n")
         f.write("    - Bearish     : SMA 20 < SMA 50 AND Close < SMA 200\n")
         f.write("    - Undetermined: Any other moving average alignment\n")
@@ -612,7 +622,7 @@ def run_strategy_scans_and_reports():
 
     if common_rvol_symbols and not fourteen_day_history_df.empty:
         rvol_report_lines.append(f"Found {len(common_rvol_symbols)} stock(s) from 14-day signal log active with RVOL > 1 today:\n")
-        rvol_report_lines.append(f"{'Symbol':<12} {'Strategy':<16} {'Bias':<10} {'Lot Size':<10} {'RVOL':<8} {'ATR14':<8} {'RS vs Nifty':<12} {'Close':<10}")
+        rvol_report_lines.append(f"{'Symbol':<12} {'Strategy':<16} {'Bias':<10} {'Lot Size':<10} {'RVOL':<8} {'ATR14':<8} {'Daily Range':<12} {'Close':<10}")
         rvol_report_lines.append("-" * 92)
 
         for sym in sorted(common_rvol_symbols):
@@ -627,7 +637,7 @@ def run_strategy_scans_and_reports():
                 f"{int(latest_sig['lot_size']):<10} "
                 f"{active_match['rvol']:<8.2f} "
                 f"{(active_match['atr_14'] if pd.notna(active_match['atr_14']) else 0):<8.2f} "
-                f"{(active_match['rs_nifty'] if pd.notna(active_match['rs_nifty']) else 0):<12.4f} "
+                f"{(active_match['daily_range'] if pd.notna(active_match['daily_range']) else 0):<12.2f} "
                 f"{active_match['close']:<10.2f}"
             )
     else:
