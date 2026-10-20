@@ -1,16 +1,20 @@
 ==================================================
  🎯 CONSOLIDATED MARKET INTELLIGENCE REPORT (2-WEEK WINDOW)
- Generated on: 2026-10-20 07:26:24
+ Generated on: 2026-10-20 08:02:37
 ==================================================
 
-【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA + RSI in Last 14D) 】
+【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA Crossover + RSI in Last 14D) 】
 No multi-strategy overlapping bullish stocks found in the past 2 weeks.
 
-【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA + RSI in Last 14D) 】
+【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA Crossover + RSI in Last 14D) 】
 No multi-strategy overlapping bearish stocks found in the past 2 weeks.
 
 --------------------------------------------------
 📋 FULL 14-DAY SIGNAL LOG:
-symbol signal_date strategy_type    bias  lot_size
-   KEI  2026-10-19 SMA_Hierarchy BEARISH       175
-   PNB  2026-10-19  RSI_Strategy BULLISH         1
+    symbol signal_date strategy_type    bias  lot_size
+       KEI  2026-10-19 SMA_Hierarchy BEARISH       175
+       PNB  2026-10-19  RSI_Strategy BULLISH         1
+  AXISBANK  2026-10-19 SMA_Crossover BEARISH       625
+BAJFINANCE  2026-10-19 SMA_Crossover BEARISH       750
+HINDUNILVR  2026-10-19 SMA_Crossover BEARISH       300
+TATACONSUM  2026-10-19 SMA_Crossover BEARISH       900

@@ -1,13 +1,13 @@
 ==================================================
  ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)
- Generated on: 2026-10-20 07:26:24
+ Generated on: 2026-10-20 08:02:37
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
 • Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.
 • Filter Criteria: Evaluates high market participation based on RVOL and Turnover.
 • Grouped & Ordered by Trend:
-    - Bullish : SMA 20 > SMA 50 AND Close > SMA 200
-    - Bearish : SMA 20 < SMA 50 AND Close < SMA 200
+    - Bullish     : SMA 20 > SMA 50 AND Close > SMA 200
+    - Bearish     : SMA 20 < SMA 50 AND Close < SMA 200
     - Undetermined: Any other moving average alignment
 --------------------------------------------------
 

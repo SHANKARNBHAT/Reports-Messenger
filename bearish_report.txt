@@ -1,4 +1,8 @@
 === BEARISH REPORT (Last 7 Days) ===
 
-symbol signal_date strategy_type    bias       close  lot_size
-   KEI  2026-10-19 SMA_Hierarchy BEARISH 4450.799805       175
+    symbol signal_date strategy_type    bias       close  lot_size
+       KEI  2026-10-19 SMA_Hierarchy BEARISH 4450.799805       175
+  AXISBANK  2026-10-19 SMA_Crossover BEARISH 1236.000000       625
+BAJFINANCE  2026-10-19 SMA_Crossover BEARISH  957.349976       750
+HINDUNILVR  2026-10-19 SMA_Crossover BEARISH 1853.199951       300
+TATACONSUM  2026-10-19 SMA_Crossover BEARISH  966.500000       900
