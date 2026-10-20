@@ -1,6 +1,6 @@
 =========================================
  CONFIRMED BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-10-20 16:52:39
+ Generated on: 2026-10-20 17:05:27
 =========================================
 
     symbol   confirmed_trend
