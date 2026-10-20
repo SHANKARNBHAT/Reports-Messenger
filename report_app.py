@@ -18,6 +18,7 @@ st.markdown(
 reports = {
     "⚡ Active Stocks": "active_stocks_report.txt",
     "📈 Strong Bullish & Bearish (RSI & SMA)": "confirmed_bullish_bearish_report.txt",
+    "🎯 Relevant Active Stocks": "relevant_active_stocks_report.txt",
     "👁️ Stocks to Watch": "rvol_active_signals_report.txt",
     "🎯 Consolidated Report": "consolidated_strategy_report.txt",
     "📈 Bullish Report": "bullish_report.txt",
