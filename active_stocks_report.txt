@@ -1,6 +1,6 @@
 ==================================================
  ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)
- Generated on: 2026-10-20 15:46:25
+ Generated on: 2026-10-20 16:45:20
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
 • Market Baseline: Nifty 50 is currently Bearish (Close vs 200 SMA & SMA 20 vs SMA 50).
