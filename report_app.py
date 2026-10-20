@@ -16,6 +16,7 @@ st.markdown(
 
 # --- Define Report Files ---
 reports = {
+    "📈 Confirmed Trends": "confirmed_bullish_bearish_report.txt",
     "⚡ Active Stocks": "active_stocks_report.txt",
     "👁️ Stocks to Watch": "rvol_active_signals_report.txt",
     "🎯 Consolidated Report": "consolidated_strategy_report.txt",
