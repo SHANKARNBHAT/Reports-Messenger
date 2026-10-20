@@ -370,7 +370,7 @@ def run_strategy_scans_and_reports():
                 return 'Bullish'
             elif (s20 < s50) and (close < s200):
                 return 'Bearish'
-        return 'Sideways'
+        return 'Undetermined'
 
     active_df['trend'] = active_df.apply(compute_trend, axis=1)
 
@@ -427,11 +427,11 @@ def run_strategy_scans_and_reports():
             else "No bearish records in past 7 days."
         )
 
-    # --- Active Stocks Report: All RVOL > 1.0, ordered Bullish, Bearish, Sideways ---
+    # --- Active Stocks Report: All RVOL > 1.0, ordered Bullish, Bearish, Undetermined ---
     active_rvol_all = active_df[active_df['rvol'] > 1.0][['symbol', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active', 'trend']].copy()
     
-    # Group stocks by trend: Bullish first (1), Bearish second (2), Sideways last (3)
-    trend_order = {'Bullish': 1, 'Bearish': 2, 'Sideways': 3}
+    # Group stocks by trend: Bullish first (1), Bearish second (2), Undetermined last (3)
+    trend_order = {'Bullish': 1, 'Bearish': 2, 'Undetermined': 3}
     active_rvol_all['trend_rank'] = active_rvol_all['trend'].map(trend_order)
     active_rvol_all = active_rvol_all.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
 
@@ -448,7 +448,7 @@ def run_strategy_scans_and_reports():
         f.write("• Grouped & Ordered by Trend:\n")
         f.write("    - Bullish : SMA 20 > SMA 50 AND Close > SMA 200\n")
         f.write("    - Bearish : SMA 20 < SMA 50 AND Close < SMA 200\n")
-        f.write("    - Sideways: Any other moving average alignment\n")
+        f.write("    - Undetermined: Any other moving average alignment\n")
         f.write("--------------------------------------------------\n\n")
         f.write(
             active_rvol_all.to_string(index=False)
