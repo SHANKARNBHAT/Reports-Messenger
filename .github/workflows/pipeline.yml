@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '30 11 * * *' # Runs daily at 5:00 PM IST (11:30 UTC)
   workflow_dispatch:
+  push:
+    branches:
+      - main  # Change to 'master' if your default branch has that name
 
 permissions:
   contents: write  # Crucial: Allows GitHub Actions to push changes back to the repo
