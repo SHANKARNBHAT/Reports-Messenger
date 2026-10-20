@@ -15,11 +15,12 @@ st.markdown(
 )
 
 # --- Define Report Files ---
+# Grouped reports: Note that "🎯 Relevant Active Stocks" and "👁️ Stocks to Watch" 
+# are handled separately in the combined tab loop below.
 reports = {
     "⚡ Active Stocks": "active_stocks_report.txt",
     "📈 Strong Bullish & Bearish (RSI & SMA)": "confirmed_bullish_bearish_report.txt",
-    "🎯 Relevant Active Stocks": "relevant_active_stocks_report.txt",
-    "👁️ Stocks to Watch": "rvol_active_signals_report.txt",
+    "🎯 Active & Watchlist": ["relevant_active_stocks_report.txt", "rvol_active_signals_report.txt"],
     "🎯 Consolidated Report": "consolidated_strategy_report.txt",
     "📈 Bullish Report": "bullish_report.txt",
     "📉 Bearish Report": "bearish_report.txt",
@@ -114,9 +115,24 @@ st.sidebar.markdown("Reports fetch real-time data directly from your repository.
 tabs = st.tabs(list(reports.keys()))
 
 # --- Render Content in Each Tab ---
-for tab, (report_name, filename) in zip(tabs, reports.items()):
+for tab, (report_name, file_target) in zip(tabs, reports.items()):
   with tab:
     st.subheader(report_name)
-    report_content = load_report_text(filename)
-    # Using st.code preserves table spacing and column alignments
-    st.code(report_content, language="text")
+    
+    # Handle the combined tab differently using side-by-side columns
+    if report_name == "🎯 Active & Watchlist":
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("### 🎯 Relevant Active Stocks")
+            content_1 = load_report_text(file_target[0])
+            st.code(content_1, language="text")
+            
+        with col2:
+            st.markdown("### 👁️ Stocks to Watch")
+            content_2 = load_report_text(file_target[1])
+            st.code(content_2, language="text")
+    else:
+        # Standard rendering for single-file tabs
+        report_content = load_report_text(file_target)
+        st.code(report_content, language="text")
