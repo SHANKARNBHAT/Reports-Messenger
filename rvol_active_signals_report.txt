@@ -1,6 +1,6 @@
 ==================================================
  👁️ STOCKS TO WATCH
- Generated on: 2026-10-19 17:59:11
+ Generated on: 2026-10-20 05:55:29
 ==================================================
 WHAT IS RVOL (RELATIVE VOLUME)?
 • Relative Volume (RVOL) compares today's trading volume against its historical
@@ -15,4 +15,4 @@ Found 1 stock(s) from 14-day signal log active with RVOL > 1 today:
 
 Symbol       Strategy         Bias       Lot Size   RVOL     Turnover(Cr)   Close     
 ------------------------------------------------------------------------------------
-PNB          RSI_Strategy     BULLISH    1          4.58     952.13         121.90    
+PNB          RSI_Strategy     BULLISH    1          4.58     952.23         121.90    
