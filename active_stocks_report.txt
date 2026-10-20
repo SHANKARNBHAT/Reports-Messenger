@@ -1,6 +1,6 @@
 ==================================================
  ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)
- Generated on: 2026-10-20 05:55:29
+ Generated on: 2026-10-20 07:26:24
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
 • Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.
@@ -8,44 +8,44 @@ REPORT CRITERIA & DESCRIPTION:
 • Grouped & Ordered by Trend:
     - Bullish : SMA 20 > SMA 50 AND Close > SMA 200
     - Bearish : SMA 20 < SMA 50 AND Close < SMA 200
-    - Sideways: Any other moving average alignment
+    - Undetermined: Any other moving average alignment
 --------------------------------------------------
 
-    symbol     rvol  turnover_cr        close   volume  is_active    trend
-MOTILALOFS 1.016286    97.742678  1021.000000   957323          0  Bullish
-      SJVN 2.137292    45.592998    51.110001  8920563          1  Bearish
-   SYNGENE 2.061425    67.967690   397.500000  1709879          1  Bearish
-BANKBARODA 1.853824   324.756135   238.199997 13633759          1  Bearish
-  AXISBANK 1.798135  1577.391976  1236.000000 12762071          1  Bearish
-   SBICARD 1.658660    85.221044   567.400024  1501957          1  Bearish
-      SBIN 1.625012  1468.657531   973.700012 15083265          1  Bearish
-     CIPLA 1.483824   183.681135  1324.099976  1387215          0  Bearish
-    M&MFIN 1.388022    71.109569   304.899994  2332226          0  Bearish
-    BIOCON 1.222587   109.562144   340.000000  3222416          0  Bearish
-       SRF 1.144995    52.368986  2432.000000   215333          0  Bearish
-BHARTIARTL 1.124364  1610.110247  1875.199951  8586339          0  Bearish
-      NHPC 1.103673    62.884607    70.699997  8894570          0  Bearish
-  RELIANCE 1.086111  1871.820991  1202.000000 15572554          0  Bearish
-SONATSOFTW 1.083867    36.556455   239.699997  1525092          0  Bearish
-BAJFINANCE 1.058014   795.447926   957.349976  8308852          0  Bearish
-      INFY 1.052807  1499.135930  1130.699951 13258477          0  Bearish
-ZENSARTECH 1.042387    83.226879   513.150024  1621882          0  Bearish
-    MARUTI 1.010576   520.772220 11475.000000   453832          0  Bearish
-       PNB 4.582369   952.227835   121.900002 78115490          1 Sideways
-FEDERALBNK 3.544642  1083.979810   348.850006 31072948          1 Sideways
-       UBL 2.579740    67.167000  1204.800049   557495          1 Sideways
-PERSISTENT 1.997831   726.718834  5690.000000  1277186          1 Sideways
-    VRLLOG 1.941189     8.576930   286.850006   299004          0 Sideways
-    360ONE 1.753492   179.016303  1055.000000  1696837          1 Sideways
-       TCS 1.592070  2135.168547  2460.899902  8676373          1 Sideways
- HOMEFIRST 1.541162    34.403001  1055.199951   326033          1 Sideways
-      LTTS 1.383612    37.815006  3611.300049   104713          0 Sideways
-  RATEGAIN 1.316890    25.634452   799.549988   320611          0 Sideways
-   MPHASIS 1.301546   191.360000  2500.000000   765440          0 Sideways
-  GRANULES 1.284004    70.470935   806.049988   874275          0 Sideways
- EICHERMOT 1.259958   360.195802  7349.000000   490129          0 Sideways
-BALKRISIND 1.222211    38.761057  2071.199951   187143          0 Sideways
-     CANBK 1.192115   278.361247   121.709999 22870861          0 Sideways
-     TECHM 1.116965   702.143510  1779.099976  3946622          0 Sideways
-  HDFCBANK 1.093126  2386.918270   712.000000 33524133          0 Sideways
-INDUSTOWER 1.081784   179.493395   382.399994  4693865          0 Sideways
+    symbol     rvol  turnover_cr        close   volume  is_active        trend
+MOTILALOFS 1.016286    97.742678  1021.000000   957323          0      Bullish
+      SJVN 2.137292    45.592998    51.110001  8920563          1      Bearish
+   SYNGENE 2.061425    67.967690   397.500000  1709879          1      Bearish
+BANKBARODA 1.853824   324.756135   238.199997 13633759          1      Bearish
+  AXISBANK 1.798135  1577.391976  1236.000000 12762071          1      Bearish
+   SBICARD 1.658660    85.221044   567.400024  1501957          1      Bearish
+      SBIN 1.625012  1468.657531   973.700012 15083265          1      Bearish
+     CIPLA 1.483824   183.681135  1324.099976  1387215          0      Bearish
+    M&MFIN 1.388022    71.109569   304.899994  2332226          0      Bearish
+    BIOCON 1.222587   109.562144   340.000000  3222416          0      Bearish
+       SRF 1.144995    52.368986  2432.000000   215333          0      Bearish
+BHARTIARTL 1.124364  1610.110247  1875.199951  8586339          0      Bearish
+      NHPC 1.103673    62.884607    70.699997  8894570          0      Bearish
+  RELIANCE 1.086111  1871.820991  1202.000000 15572554          0      Bearish
+SONATSOFTW 1.083867    36.556455   239.699997  1525092          0      Bearish
+BAJFINANCE 1.058014   795.447926   957.349976  8308852          0      Bearish
+      INFY 1.052807  1499.135930  1130.699951 13258477          0      Bearish
+ZENSARTECH 1.042387    83.226879   513.150024  1621882          0      Bearish
+    MARUTI 1.010576   520.772220 11475.000000   453832          0      Bearish
+       PNB 4.582369   952.227835   121.900002 78115490          1 Undetermined
+FEDERALBNK 3.544642  1083.979810   348.850006 31072948          1 Undetermined
+       UBL 2.579740    67.167000  1204.800049   557495          1 Undetermined
+PERSISTENT 1.997831   726.718834  5690.000000  1277186          1 Undetermined
+    VRLLOG 1.941189     8.576930   286.850006   299004          0 Undetermined
+    360ONE 1.753492   179.016303  1055.000000  1696837          1 Undetermined
+       TCS 1.592070  2135.168547  2460.899902  8676373          1 Undetermined
+ HOMEFIRST 1.541162    34.403001  1055.199951   326033          1 Undetermined
+      LTTS 1.383612    37.815006  3611.300049   104713          0 Undetermined
+  RATEGAIN 1.316890    25.634452   799.549988   320611          0 Undetermined
+   MPHASIS 1.301546   191.360000  2500.000000   765440          0 Undetermined
+  GRANULES 1.284004    70.470935   806.049988   874275          0 Undetermined
+ EICHERMOT 1.259958   360.195802  7349.000000   490129          0 Undetermined
+BALKRISIND 1.222211    38.761057  2071.199951   187143          0 Undetermined
+     CANBK 1.192115   278.361247   121.709999 22870861          0 Undetermined
+     TECHM 1.116965   702.143510  1779.099976  3946622          0 Undetermined
+  HDFCBANK 1.093126  2386.918270   712.000000 33524133          0 Undetermined
+INDUSTOWER 1.081784   179.493395   382.399994  4693865          0 Undetermined
