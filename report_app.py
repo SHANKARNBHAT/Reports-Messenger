@@ -129,7 +129,7 @@ for tab, (report_name, file_target) in zip(tabs, reports.items()):
             st.code(content_1, language="text")
             
         with col2:
-            st.markdown("### 👁️ Stocks to Watch")
+            st.markdown("### 👁️ Stocks to Watch from Strategy triggers")
             content_2 = load_report_text(file_target[1])
             st.code(content_2, language="text")
     else:
