@@ -1,23 +1,23 @@
 =========================================
- CONFIRMED BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-10-20 17:05:27
+ STRONG BULLISH & BEARISH STOCKS (3M+)
+ Generated on: 2026-10-20 17:15:10
 =========================================
 
-    symbol   confirmed_trend
-LAURUSLABS Confirmed Bullish
-  DIVISLAB Confirmed Bullish
-       MCX Confirmed Bullish
- KOTAKBANK Confirmed Bullish
- TATAELXSI Confirmed Bearish
-MOTILALOFS Confirmed Bullish
-      INFY Confirmed Bearish
-       LTM Confirmed Bearish
-   DRREDDY Confirmed Bullish
-     WIPRO Confirmed Bearish
-  INDHOTEL Confirmed Bullish
-      BHEL Confirmed Bullish
-HEROMOTOCO Confirmed Bearish
-  FORCEMOT Confirmed Bearish
-  AXISBANK Confirmed Bearish
-  JUBLFOOD Confirmed Bearish
+    symbol confirmed_trend
+LAURUSLABS  Strong Bullish
+  DIVISLAB  Strong Bullish
+       MCX  Strong Bullish
+ KOTAKBANK  Strong Bullish
+ TATAELXSI  Strong Bearish
+MOTILALOFS  Strong Bullish
+      INFY  Strong Bearish
+       LTM  Strong Bearish
+   DRREDDY  Strong Bullish
+     WIPRO  Strong Bearish
+  INDHOTEL  Strong Bullish
+      BHEL  Strong Bullish
+HEROMOTOCO  Strong Bearish
+  FORCEMOT  Strong Bearish
+  AXISBANK  Strong Bearish
+  JUBLFOOD  Strong Bearish
 =========================================
