@@ -124,7 +124,7 @@ for tab, (report_name, file_target) in zip(tabs, reports.items()):
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("### 🎯 Relevant Active Stocks")
+            st.markdown("### 🎯 Relevant strategy following Active Stocks ")
             content_1 = load_report_text(file_target[0])
             st.code(content_1, language="text")
             
