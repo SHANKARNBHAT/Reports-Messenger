@@ -1,51 +1,58 @@
 ==================================================
  ⚡ ALL ACTIVE STOCKS REPORT (RVOL > 1.0)
- Generated on: 2026-10-20 08:02:37
+ Generated on: 2026-10-20 09:27:25
 ==================================================
 REPORT CRITERIA & DESCRIPTION:
+• Market Baseline: Nifty 50 is currently Bearish (Close vs 200 SMA & SMA 20 vs SMA 50).
 • Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.
-• Filter Criteria: Evaluates high market participation based on RVOL and Turnover.
+• Action Logic:
+    - Long : Bullish Trend AND RS vs Nifty > 0
+    - Short: Bearish Trend AND RS vs Nifty < 0
+    - Wait : Trend & RS Divergence (e.g., Bearish + Positive RS)
 • Grouped & Ordered by Trend:
     - Bullish     : SMA 20 > SMA 50 AND Close > SMA 200
     - Bearish     : SMA 20 < SMA 50 AND Close < SMA 200
     - Undetermined: Any other moving average alignment
 --------------------------------------------------
 
-    symbol     rvol  turnover_cr        close   volume  is_active        trend
-MOTILALOFS 1.016286    97.742678  1021.000000   957323          0      Bullish
-      SJVN 2.137292    45.592998    51.110001  8920563          1      Bearish
-   SYNGENE 2.061425    67.967690   397.500000  1709879          1      Bearish
-BANKBARODA 1.853824   324.756135   238.199997 13633759          1      Bearish
-  AXISBANK 1.798135  1577.391976  1236.000000 12762071          1      Bearish
-   SBICARD 1.658660    85.221044   567.400024  1501957          1      Bearish
-      SBIN 1.625012  1468.657531   973.700012 15083265          1      Bearish
-     CIPLA 1.483824   183.681135  1324.099976  1387215          0      Bearish
-    M&MFIN 1.388022    71.109569   304.899994  2332226          0      Bearish
-    BIOCON 1.222587   109.562144   340.000000  3222416          0      Bearish
-       SRF 1.144995    52.368986  2432.000000   215333          0      Bearish
-BHARTIARTL 1.124364  1610.110247  1875.199951  8586339          0      Bearish
-      NHPC 1.103673    62.884607    70.699997  8894570          0      Bearish
-  RELIANCE 1.086111  1871.820991  1202.000000 15572554          0      Bearish
-SONATSOFTW 1.083867    36.556455   239.699997  1525092          0      Bearish
-BAJFINANCE 1.058014   795.447926   957.349976  8308852          0      Bearish
-      INFY 1.052807  1499.135930  1130.699951 13258477          0      Bearish
-ZENSARTECH 1.042387    83.226879   513.150024  1621882          0      Bearish
-    MARUTI 1.010576   520.772220 11475.000000   453832          0      Bearish
-       PNB 4.582369   952.227835   121.900002 78115490          1 Undetermined
-FEDERALBNK 3.544642  1083.979810   348.850006 31072948          1 Undetermined
-       UBL 2.579740    67.167000  1204.800049   557495          1 Undetermined
-PERSISTENT 1.997831   726.718834  5690.000000  1277186          1 Undetermined
-    VRLLOG 1.941189     8.576930   286.850006   299004          0 Undetermined
-    360ONE 1.753492   179.016303  1055.000000  1696837          1 Undetermined
-       TCS 1.592070  2135.168547  2460.899902  8676373          1 Undetermined
- HOMEFIRST 1.541162    34.403001  1055.199951   326033          1 Undetermined
-      LTTS 1.383612    37.815006  3611.300049   104713          0 Undetermined
-  RATEGAIN 1.316890    25.634452   799.549988   320611          0 Undetermined
-   MPHASIS 1.301546   191.360000  2500.000000   765440          0 Undetermined
-  GRANULES 1.284004    70.470935   806.049988   874275          0 Undetermined
- EICHERMOT 1.259958   360.195802  7349.000000   490129          0 Undetermined
-BALKRISIND 1.222211    38.761057  2071.199951   187143          0 Undetermined
-     CANBK 1.192115   278.361247   121.709999 22870861          0 Undetermined
-     TECHM 1.116965   702.143510  1779.099976  3946622          0 Undetermined
-  HDFCBANK 1.093126  2386.918270   712.000000 33524133          0 Undetermined
-INDUSTOWER 1.081784   179.493395   382.399994  4693865          0 Undetermined
+    symbol rvol    close atr_14 rs_nifty  is_active        trend action
+    SMLMAH 1.28  6112.00 252.50  +0.1484          0      Bullish   Long
+MOTILALOFS 1.02  1021.00  37.79  +0.2391          0      Bullish   Long
+       UBL 2.58  1204.80  36.36  -0.0718          1      Bearish  Short
+      SJVN 2.14    51.11   1.92  -0.1782          1      Bearish  Short
+   SYNGENE 2.06   397.50  13.25  +0.0653          1      Bearish   Wait
+BANKBARODA 1.85   238.20   5.81  +0.0199          1      Bearish   Wait
+       LTM 1.84  4264.90 155.08  +0.0128          1      Bearish   Wait
+  AXISBANK 1.80  1236.00  29.20  +0.0550          1      Bearish   Wait
+   SBICARD 1.66   567.40  14.22  -0.0694          1      Bearish  Short
+      SBIN 1.63   973.70  17.33  -0.0317          1      Bearish  Short
+     CANBK 1.58   122.00   3.50  -0.0027          1      Bearish  Short
+ HOMEFIRST 1.54  1055.20  37.54  -0.0432          1      Bearish  Short
+     CIPLA 1.48  1324.10  25.99  -0.0326          0      Bearish  Short
+    M&MFIN 1.39   304.90  10.44  -0.1449          0      Bearish  Short
+    BIOCON 1.22   340.00   8.24  -0.1503          0      Bearish  Short
+BALKRISIND 1.22  2071.20  52.19  -0.0891          0      Bearish  Short
+       SRF 1.14  2432.00  57.34  -0.0026          0      Bearish  Short
+BHARTIARTL 1.12  1875.20  44.16  +0.0335          0      Bearish   Wait
+      NHPC 1.10    70.70   1.55  -0.0143          0      Bearish  Short
+  RELIANCE 1.09  1202.00  25.29  -0.0219          0      Bearish  Short
+SONATSOFTW 1.08   239.70  12.60  -0.2042          0      Bearish  Short
+BAJFINANCE 1.06   957.35  26.43  -0.0928          0      Bearish  Short
+      INFY 1.05  1130.70  34.34  +0.0415          0      Bearish   Wait
+ZENSARTECH 1.04   513.15  18.63  +0.0959          0      Bearish   Wait
+    MARUTI 1.01 11475.00 266.57  -0.1059          0      Bearish  Short
+       PNB 4.58   121.90   3.70  +0.1374          1 Undetermined   Wait
+FEDERALBNK 3.54   348.85  10.29  +0.0610          1 Undetermined   Wait
+ ICICIBANK 2.27  1381.00  27.10  +0.0184          1 Undetermined   Wait
+PERSISTENT 2.00  5690.00 204.50  +0.1131          1 Undetermined   Wait
+    VRLLOG 1.94   286.85   6.12  +0.0786          0 Undetermined   Wait
+    360ONE 1.75  1055.00  27.40  -0.0395          1 Undetermined   Wait
+       TCS 1.59  2460.90  78.05  +0.1135          1 Undetermined   Wait
+      LTTS 1.38  3611.30 139.66  +0.0866          0 Undetermined   Wait
+  RATEGAIN 1.32   799.55  31.32  -0.0830          0 Undetermined   Wait
+   MPHASIS 1.30  2500.00  79.49  +0.1032          0 Undetermined   Wait
+  GRANULES 1.28   806.05  29.60  +0.0320          0 Undetermined   Wait
+ EICHERMOT 1.26  7349.00 163.75  -0.0067          0 Undetermined   Wait
+     TECHM 1.12  1779.10  56.49  +0.1609          0 Undetermined   Wait
+  HDFCBANK 1.09   712.00  15.86  +0.0405          0 Undetermined   Wait
+INDUSTOWER 1.08   382.40  10.16  +0.1061          0 Undetermined   Wait

@@ -1,20 +1,22 @@
 ==================================================
  👁️ STOCKS TO WATCH
- Generated on: 2026-10-20 08:02:37
+ Generated on: 2026-10-20 09:27:25
 ==================================================
+• Market Baseline: Nifty 50 is currently Bearish (Close vs 200 SMA & SMA 20 vs SMA 50).
+
 WHAT IS RVOL (RELATIVE VOLUME)?
-• Relative Volume (RVOL) compares today's trading volume against its historical
-  average (e.g., 20-day average). An RVOL > 1.0 means trading volume is higher than normal.
-• High RVOL (> 1.5) often highlights institutional participation, breakouts, or major news.
+• Relative Volume (RVOL) compares today's trading volume against its historical average.
+• High RVOL (> 1.5) highlights institutional participation or breakouts.
 
 REPORT CRITERIA:
 • Cross-references past 14-day technical signals with stocks exhibiting RVOL > 1.0 today.
 --------------------------------------------------
 
-Found 3 stock(s) from 14-day signal log active with RVOL > 1 today:
+Found 4 stock(s) from 14-day signal log active with RVOL > 1 today:
 
-Symbol       Strategy         Bias       Lot Size   RVOL     Turnover(Cr)   Close     
-------------------------------------------------------------------------------------
-AXISBANK     SMA_Crossover    BEARISH    625        1.80     1577.39        1236.00   
-BAJFINANCE   SMA_Crossover    BEARISH    750        1.06     795.45         957.35    
-PNB          RSI_Strategy     BULLISH    1          4.58     952.23         121.90    
+Symbol       Strategy         Bias       Lot Size   RVOL     ATR14    RS vs Nifty  Close     
+--------------------------------------------------------------------------------------------
+AXISBANK     SMA_Crossover    BEARISH    625        1.80     29.20    0.0550       1236.00   
+BAJFINANCE   SMA_Crossover    BEARISH    750        1.06     26.43    -0.0928      957.35    
+LTM          SMA_Crossover    BEARISH    1          1.84     155.08   0.0128       4264.90   
+PNB          RSI_Strategy     BULLISH    1          4.58     3.70     0.1374       121.90    
