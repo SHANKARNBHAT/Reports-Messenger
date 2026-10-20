@@ -141,8 +141,8 @@ def run_market_update(csv_filename="futures stocks.csv"):
         for s in raw_symbols
     ]
 
-    print(f"Fetching market data for {len(symbols)} stocks via yfinance (2-year history for 200 SMA)...")
-    # Increased period to "2y" so SMA 200 can be calculated properly
+    print(f"Fetching market data for {len(symbols)} stocks via yfinance (2y period for 200 SMA)...")
+    # Using 2 years of history so SMA 200 is accurately populated
     data = yf.download(symbols, period="2y", group_by="ticker", progress=False)
 
     conn = sqlite3.connect(DB_PATH)
@@ -200,50 +200,22 @@ def run_market_update(csv_filename="futures stocks.csv"):
                     (
                         clean_symbol,
                         date_val,
-                        float(row.get("open"))
-                        if pd.notna(row.get("open"))
-                        else None,
-                        float(row.get("high"))
-                        if pd.notna(row.get("high"))
-                        else None,
-                        float(row.get("low"))
-                        if pd.notna(row.get("low"))
-                        else None,
+                        float(row.get("open")) if pd.notna(row.get("open")) else None,
+                        float(row.get("high")) if pd.notna(row.get("high")) else None,
+                        float(row.get("low")) if pd.notna(row.get("low")) else None,
                         float(close_p),
                         int(row.get("volume", 0)),
-                        float(row.get("sma_8"))
-                        if pd.notna(row.get("sma_8"))
-                        else None,
-                        float(row.get("sma_20"))
-                        if pd.notna(row.get("sma_20"))
-                        else None,
-                        float(row.get("sma_50"))
-                        if pd.notna(row.get("sma_50"))
-                        else None,
-                        float(row.get("sma_60"))
-                        if pd.notna(row.get("sma_60"))
-                        else None,
-                        float(row.get("sma_200"))
-                        if pd.notna(row.get("sma_200"))
-                        else None,
-                        float(row.get("volume_sma"))
-                        if pd.notna(row.get("volume_sma"))
-                        else None,
-                        float(row.get("volume_sma_5"))
-                        if pd.notna(row.get("volume_sma_5"))
-                        else None,
-                        float(row.get("rvol"))
-                        if pd.notna(row.get("rvol"))
-                        else None,
-                        float(row.get("turnover_cr"))
-                        if pd.notna(row.get("turnover_cr"))
-                        else None,
-                        float(row.get("rsi_20"))
-                        if pd.notna(row.get("rsi_20"))
-                        else None,
-                        float(row.get("rsi_sma_20"))
-                        if pd.notna(row.get("rsi_sma_20"))
-                        else None,
+                        float(row.get("sma_8")) if pd.notna(row.get("sma_8")) else None,
+                        float(row.get("sma_20")) if pd.notna(row.get("sma_20")) else None,
+                        float(row.get("sma_50")) if pd.notna(row.get("sma_50")) else None,
+                        float(row.get("sma_60")) if pd.notna(row.get("sma_60")) else None,
+                        float(row.get("sma_200")) if pd.notna(row.get("sma_200")) else None,
+                        float(row.get("volume_sma")) if pd.notna(row.get("volume_sma")) else None,
+                        float(row.get("volume_sma_5")) if pd.notna(row.get("volume_sma_5")) else None,
+                        float(row.get("rvol")) if pd.notna(row.get("rvol")) else None,
+                        float(row.get("turnover_cr")) if pd.notna(row.get("turnover_cr")) else None,
+                        float(row.get("rsi_20")) if pd.notna(row.get("rsi_20")) else None,
+                        float(row.get("rsi_sma_20")) if pd.notna(row.get("rsi_sma_20")) else None,
                         int(lot_size),
                         int(row.get("is_active", 0)),
                     ),
@@ -253,7 +225,6 @@ def run_market_update(csv_filename="futures stocks.csv"):
         except Exception:
             continue
 
-    # Prune old database records to prevent unbounded growth
     prune_old_database_records(conn, max_days=450)
     conn.close()
     print(f"Database update complete. Synced {updated_records} records.")
@@ -282,30 +253,35 @@ def run_strategy_scans_and_reports():
         current_date = str(latest["date"])[:10]
         lot_size = int(latest["lot_size"]) if pd.notna(latest["lot_size"]) else 1
 
-        # --- Strategy 1: SMA Crossover (20 vs 50 with 200 SMA filter) ---
+        # --- Strategy 1: Price Cross of SMA 20 / SMA 50 with 200 SMA Filter ---
         s20_l, s50_l, s200_l, close_l = latest["sma_20"], latest["sma_50"], latest["sma_200"], latest["close"]
-        s20_p, s50_p = prev["sma_20"], prev["sma_50"]
+        s20_p, s50_p, close_p = prev["sma_20"], prev["sma_50"], prev["close"]
 
-        if pd.notna(s20_l) and pd.notna(s50_l) and pd.notna(s200_l) and pd.notna(close_l):
-            if (s20_l > s50_l) and (s20_p <= s50_p) and (close_l > s200_l):
+        if pd.notna(s20_l) and pd.notna(s50_l) and pd.notna(s200_l) and pd.notna(close_l) and pd.notna(close_p):
+            crossed_above_sma20 = (close_p <= s20_p) and (close_l > s20_l)
+            crossed_above_sma50 = (close_p <= s50_p) and (close_l > s50_l)
+            crossed_below_sma20 = (close_p >= s20_p) and (close_l < s20_l)
+            crossed_below_sma50 = (close_p >= s50_p) and (close_l < s50_l)
+
+            if (s20_l >= s50_l) and (crossed_above_sma20 or crossed_above_sma50) and (close_l > s200_l):
                 cursor.execute(
                     "INSERT OR IGNORE INTO strategy_signal_history (symbol, signal_date, strategy_type, bias, close, lot_size) VALUES (?, ?, ?, ?, ?, ?)",
                     (
                         symbol,
                         current_date,
-                        "SMA_Hierarchy",
+                        "SMA_Crossover",
                         "BULLISH",
                         latest["close"],
                         lot_size,
                     ),
                 )
-            elif (s20_l < s50_l) and (s20_p >= s50_p) and (close_l < s200_l):
+            elif (s20_l <= s50_l) and (crossed_below_sma20 or crossed_below_sma50) and (close_l < s200_l):
                 cursor.execute(
                     "INSERT OR IGNORE INTO strategy_signal_history (symbol, signal_date, strategy_type, bias, close, lot_size) VALUES (?, ?, ?, ?, ?, ?)",
                     (
                         symbol,
                         current_date,
-                        "SMA_Hierarchy",
+                        "SMA_Crossover",
                         "BEARISH",
                         latest["close"],
                         lot_size,
@@ -362,7 +338,7 @@ def run_strategy_scans_and_reports():
         conn,
     )
 
-    # Calculate Trend field based on SMA 20 > 50 and Close > 200 condition
+    # Calculate Trend field based on SMA 20 vs 50 and Close vs 200
     def compute_trend(row):
         s20, s50, s200, close = row['sma_20'], row['sma_50'], row['sma_200'], row['close']
         if pd.notna(s20) and pd.notna(s50) and pd.notna(s200) and pd.notna(close):
@@ -374,7 +350,6 @@ def run_strategy_scans_and_reports():
 
     active_df['trend'] = active_df.apply(compute_trend, axis=1)
 
-    # 7-day history for individual bullish/bearish reports
     history_df = pd.read_sql_query(
         f"""
         SELECT symbol, signal_date, strategy_type, bias, close, lot_size 
@@ -384,7 +359,6 @@ def run_strategy_scans_and_reports():
         conn,
     )
 
-    # 14-day history for Consolidated and Stocks to Watch reports
     fourteen_day_history_df = pd.read_sql_query(
         f"""
         SELECT symbol, signal_date, strategy_type, bias, close, lot_size 
@@ -427,10 +401,9 @@ def run_strategy_scans_and_reports():
             else "No bearish records in past 7 days."
         )
 
-    # --- Active Stocks Report: All RVOL > 1.0, ordered Bullish, Bearish, Undetermined ---
+    # --- Active Stocks Report: Ordered Bullish, Bearish, Undetermined ---
     active_rvol_all = active_df[active_df['rvol'] > 1.0][['symbol', 'rvol', 'turnover_cr', 'close', 'volume', 'is_active', 'trend']].copy()
     
-    # Group stocks by trend: Bullish first (1), Bearish second (2), Undetermined last (3)
     trend_order = {'Bullish': 1, 'Bearish': 2, 'Undetermined': 3}
     active_rvol_all['trend_rank'] = active_rvol_all['trend'].map(trend_order)
     active_rvol_all = active_rvol_all.sort_values(by=['trend_rank', 'rvol'], ascending=[True, False]).drop(columns=['trend_rank'])
@@ -446,8 +419,8 @@ def run_strategy_scans_and_reports():
         f.write("• Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.\n")
         f.write("• Filter Criteria: Evaluates high market participation based on RVOL and Turnover.\n")
         f.write("• Grouped & Ordered by Trend:\n")
-        f.write("    - Bullish : SMA 20 > SMA 50 AND Close > SMA 200\n")
-        f.write("    - Bearish : SMA 20 < SMA 50 AND Close < SMA 200\n")
+        f.write("    - Bullish     : SMA 20 > SMA 50 AND Close > SMA 200\n")
+        f.write("    - Bearish     : SMA 20 < SMA 50 AND Close < SMA 200\n")
         f.write("    - Undetermined: Any other moving average alignment\n")
         f.write("--------------------------------------------------\n\n")
         f.write(
@@ -470,7 +443,7 @@ def run_strategy_scans_and_reports():
 
     bullish_overlap = (
         set(
-            bullish_14d_records[bullish_14d_records["strategy_type"] == "SMA_Hierarchy"][
+            bullish_14d_records[bullish_14d_records["strategy_type"] == "SMA_Crossover"][
                 "symbol"
             ]
         ).intersection(
@@ -485,7 +458,7 @@ def run_strategy_scans_and_reports():
     )
     bearish_overlap = (
         set(
-            bearish_14d_records[bearish_14d_records["strategy_type"] == "SMA_Hierarchy"][
+            bearish_14d_records[bearish_14d_records["strategy_type"] == "SMA_Crossover"][
                 "symbol"
             ]
         ).intersection(
@@ -511,7 +484,7 @@ def run_strategy_scans_and_reports():
         )
         f.write("==================================================\n\n")
 
-        f.write("【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA + RSI in Last 14D) 】\n")
+        f.write("【 🟢 HIGH-CONVICTION BULLISH OVERLAPS (SMA Crossover + RSI in Last 14D) 】\n")
         if bullish_overlap:
             for sym in sorted(bullish_overlap):
                 sample_row = bullish_14d_records[
@@ -526,7 +499,7 @@ def run_strategy_scans_and_reports():
                 "No multi-strategy overlapping bullish stocks found in the past 2 weeks.\n"
             )
 
-        f.write("\n【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA + RSI in Last 14D) 】\n")
+        f.write("\n【 🔴 HIGH-CONVICTION BEARISH OVERLAPS (SMA Crossover + RSI in Last 14D) 】\n")
         if bearish_overlap:
             for sym in sorted(bearish_overlap):
                 sample_row = bearish_14d_records[
@@ -582,7 +555,7 @@ def run_strategy_scans_and_reports():
         "• High RVOL (> 1.5) often highlights institutional participation, breakouts, or major news.",
         "",
         "REPORT CRITERIA:",
-        "• Cross-references past 14-day technical signals (SMA & RSI) with stocks exhibiting RVOL > 1.0 today.",
+        "• Cross-references past 14-day technical signals with stocks exhibiting RVOL > 1.0 today.",
         "--------------------------------------------------\n",
     ]
 
@@ -652,7 +625,6 @@ def dispatch_to_telegram():
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            # Replace < and > with LT and GT to avoid Telegram HTML parser issues
             content = content.replace(">", " GT ").replace("<", " LT ")
 
             max_len = 4000
