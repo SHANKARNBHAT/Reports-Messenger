@@ -8,28 +8,71 @@ from datetime import datetime
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(SCRIPT_DIR, "stock_market_data.db")
+ACTIVE_REPORT_PATH = os.path.join(SCRIPT_DIR, "active_stocks_report.txt")
 
 pd.set_option('display.max_columns', None)
-pd.set_option('display.width', 100)
+pd.set_option('display.width', 150)
 pd.set_option('expand_frame_repr', False)
 
-def generate_unified_confirmed_report():
+def parse_active_stocks_symbols():
+    """Parses the stock symbols from the existing active_stocks_report.txt file."""
+    if not os.path.exists(ACTIVE_REPORT_PATH):
+        print(f"Warning: {ACTIVE_REPORT_PATH} not found. Cannot cross-reference active stocks.")
+        return set()
+
+    active_symbols = set()
+    with open(ACTIVE_REPORT_PATH, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    
+    # Read line-by-line looking for stock symbols in the report layout
+    parsing_started = False
+    for line in lines:
+        if "---" in line or "===" in line:
+            if parsing_started:
+                # If we hit another separator after starting, we might be done or headers finished
+                pass
+            continue
+        
+        parts = line.strip().split()
+        if not parts:
+            continue
+            
+        # Skip header rows
+        if parts[0].lower() in ["symbol", "market", "active", "report"]:
+            parsing_started = True
+            continue
+            
+        if parsing_started or len(parts) > 1:
+            # The first column is typically the stock symbol
+            symbol = parts[0]
+            # Validate it looks like a ticker name (alphanumeric)
+            if symbol.isalnum() and symbol.upper() != "SYMBOL":
+                active_symbols.add(symbol.upper())
+
+    return active_symbols
+
+def generate_unified_and_relevant_reports():
     if not os.path.exists(DB_PATH):
         print(f"Error: Database not found at {DB_PATH}.")
         return
+
+    # 1. Parse active stock symbols from active_stocks_report.txt
+    active_stock_symbols = parse_active_stocks_symbols()
+    print(f"Loaded {len(active_stock_symbols)} active stocks from {ACTIVE_REPORT_PATH}")
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("SELECT DISTINCT symbol FROM stock_ohlc_indicators WHERE symbol != '^NSEI';")
     symbols = [row[0] for row in cursor.fetchall()]
 
-    records = []
+    confirmed_records = []
+    active_matched_rows = []
 
-    print(f"Analyzing {len(symbols)} stocks for confirmed trends...")
+    print(f"Analyzing {len(symbols)} stocks for trend signals...")
 
     for symbol in symbols:
         query = """
-            SELECT date, close, sma_20, sma_50, sma_200
+            SELECT date, open, high, low, close, volume, sma_20, sma_50, sma_200, rsi_20, rsi_sma_20
             FROM stock_ohlc_indicators 
             WHERE symbol = ? 
             ORDER BY date ASC;
@@ -43,6 +86,10 @@ def generate_unified_confirmed_report():
         prev = df.iloc[-2]
 
         close = latest['close']
+        open_p = latest['open']
+        high = latest['high']
+        low = latest['low']
+        volume = latest['volume']
         sma20 = latest['sma_20']
         sma50 = latest['sma_50']
         sma200 = latest['sma_200']
@@ -93,43 +140,70 @@ def generate_unified_confirmed_report():
 
         # Conflict resolution: SMA trend takes priority
         if signal_bias in ["Bullish", "Bearish"] and signal_bias == sma_trend:
-            resolved_trend = f"Confirmed {sma_trend}"
+            resolved_trend = f"Strong {sma_trend}"
         else:
             resolved_trend = sma_trend
 
         # Keep ONLY strictly Bullish or Bearish confirmed trends (Drop Undetermined)
         if sma_trend in ["Bullish", "Bearish"]:
-            records.append({
+            confirmed_records.append({
                 'symbol': symbol,
                 'return_3m': return_3m,
                 'confirmed_trend': resolved_trend
             })
 
+            # Check if this strong trend stock is also present in active stocks
+            if symbol.upper() in active_stock_symbols:
+                active_matched_rows.append({
+                    'symbol': symbol,
+                    'close': close,
+                    'return_3m': return_3m,
+                    'trend': resolved_trend,
+                    'volume': volume
+                })
+
     conn.close()
 
-    if not records:
-        print("No matching bullish/bearish stocks found.")
-        return
+    # --- 2. Write confirmed_bullish_bearish_report.txt ---
+    if confirmed_records:
+        df_res = pd.DataFrame(confirmed_records)
+        df_sorted = df_res.sort_values(by='return_3m', ascending=False).copy()
+        df_final = df_sorted[['symbol', 'confirmed_trend']]
 
-    df_res = pd.DataFrame(records)
-    # Sort from highest to lowest 3-month performance
-    df_sorted = df_res.sort_values(by='return_3m', ascending=False).copy()
+        report_file_1 = os.path.join(SCRIPT_DIR, "confirmed_bullish_bearish_report.txt")
+        with open(report_file_1, "w", encoding="utf-8") as f:
+            f.write("=========================================\n")
+            f.write(" STRONG BULLISH & BEARISH STOCKS (3M+)\n")
+            f.write(f" Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("=========================================\n\n")
+            f.write(df_final.to_string(index=False))
+            f.write("\n=========================================\n")
+        print(f"Saved: {report_file_1}")
 
-    # Final columns: Symbol and Confirmed Trend only
-    df_final = df_sorted[['symbol', 'confirmed_trend']]
-
-    # Save output file for GitHub actions
-    report_file = os.path.join(SCRIPT_DIR, "confirmed_bullish_bearish_report.txt")
-    with open(report_file, "w", encoding="utf-8") as f:
-        f.write("=========================================\n")
-        f.write(" CONFIRMED BULLISH & BEARISH STOCKS (3M+)\n")
+    # --- 3. Write relevant_active_stocks_report.txt (Matching Active Stocks Template) ---
+    report_file_2 = os.path.join(SCRIPT_DIR, "relevant_active_stocks_report.txt")
+    with open(report_file_2, "w", encoding="utf-8") as f:
+        f.write("=========================================================================================\n")
+        f.write(" 🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)\n")
         f.write(f" Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("=========================================\n\n")
-        f.write(df_final.to_string(index=False))
-        f.write("\n=========================================\n")
-
-    print(f"\nReport successfully saved to: {report_file}\n")
-    print(df_final.to_string(index=False))
+        f.write("=========================================================================================\n\n")
+        
+        if active_matched_rows:
+            df_active_matched = pd.DataFrame(active_matched_rows)
+            df_active_matched = df_active_matched.sort_values(by='return_3m', ascending=False)
+            
+            # Formatting to mimic typical Active Stocks columns template
+            df_active_matched['return_3m'] = df_active_matched['return_3m'].map('{:+.2f}%'.format)
+            df_active_matched['close'] = df_active_matched['close'].map('{:,.2f}'.format)
+            
+            cols_to_print = ['symbol', 'close', 'return_3m', 'trend', 'volume']
+            f.write(df_active_matched[cols_to_print].to_string(index=False))
+        else:
+            f.write("No overlapping stocks found between Active Stocks and Strong Trend filters.\n")
+            
+        f.write("\n=========================================================================================\n")
+        
+    print(f"Saved: {report_file_2}")
 
 if __name__ == "__main__":
-    generate_unified_confirmed_report()
+    generate_unified_and_relevant_reports()
