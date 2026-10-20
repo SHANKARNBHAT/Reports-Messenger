@@ -141,8 +141,9 @@ def run_market_update(csv_filename="futures stocks.csv"):
         for s in raw_symbols
     ]
 
-    print(f"Fetching market data for {len(symbols)} stocks via yfinance...")
-    data = yf.download(symbols, period="6mo", group_by="ticker", progress=False)
+    print(f"Fetching market data for {len(symbols)} stocks via yfinance (2-year history for 200 SMA)...")
+    # Increased period to "2y" so SMA 200 can be calculated properly
+    data = yf.download(symbols, period="2y", group_by="ticker", progress=False)
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
@@ -153,7 +154,7 @@ def run_market_update(csv_filename="futures stocks.csv"):
         lot_size = lot_map.get(clean_symbol, 1)
         try:
             hist = data[symbol] if len(symbols) > 1 else data
-            if hist.empty or len(hist) < 50:
+            if hist.empty or len(hist) < 200:
                 continue
             hist = hist.reset_index()
             hist.columns = [str(c).lower() for c in hist.columns]
@@ -269,7 +270,7 @@ def run_strategy_scans_and_reports():
 
     for symbol in symbols:
         query = """
-            SELECT date, close, sma_8, sma_20, sma_50, rsi_20, rsi_sma_20, lot_size, is_active
+            SELECT date, close, sma_20, sma_50, sma_200, rsi_20, rsi_sma_20, lot_size, is_active
             FROM stock_ohlc_indicators WHERE symbol = ? ORDER BY date ASC;
         """
         df = pd.read_sql_query(query, conn, params=(symbol,))
@@ -281,12 +282,12 @@ def run_strategy_scans_and_reports():
         current_date = str(latest["date"])[:10]
         lot_size = int(latest["lot_size"]) if pd.notna(latest["lot_size"]) else 1
 
-        # --- Strategy 1: SMA Hierarchy (8 > 20 > 50) ---
-        s8_l, s20_l, s50_l = latest["sma_8"], latest["sma_20"], latest["sma_50"]
-        s8_p, s20_p, s50_p = prev["sma_8"], prev["sma_20"], prev["sma_50"]
+        # --- Strategy 1: SMA Crossover (20 vs 50 with 200 SMA filter) ---
+        s20_l, s50_l, s200_l, close_l = latest["sma_20"], latest["sma_50"], latest["sma_200"], latest["close"]
+        s20_p, s50_p = prev["sma_20"], prev["sma_50"]
 
-        if pd.notna(s8_l) and pd.notna(s20_l) and pd.notna(s50_l):
-            if (s8_l > s20_l > s50_l) and (s8_p <= s20_p):
+        if pd.notna(s20_l) and pd.notna(s50_l) and pd.notna(s200_l) and pd.notna(close_l):
+            if (s20_l > s50_l) and (s20_p <= s50_p) and (close_l > s200_l):
                 cursor.execute(
                     "INSERT OR IGNORE INTO strategy_signal_history (symbol, signal_date, strategy_type, bias, close, lot_size) VALUES (?, ?, ?, ?, ?, ?)",
                     (
@@ -298,7 +299,7 @@ def run_strategy_scans_and_reports():
                         lot_size,
                     ),
                 )
-            elif (s8_l < s20_l < s50_l) and (s8_p >= s20_p):
+            elif (s20_l < s50_l) and (s20_p >= s50_p) and (close_l < s200_l):
                 cursor.execute(
                     "INSERT OR IGNORE INTO strategy_signal_history (symbol, signal_date, strategy_type, bias, close, lot_size) VALUES (?, ?, ?, ?, ?, ?)",
                     (
@@ -353,7 +354,7 @@ def run_strategy_scans_and_reports():
 
     active_df = pd.read_sql_query(
         """
-        SELECT symbol, sma_8, sma_20, sma_50, rvol, turnover_cr, close, volume, is_active 
+        SELECT symbol, sma_20, sma_50, sma_200, rvol, turnover_cr, close, volume, is_active 
         FROM stock_ohlc_indicators 
         WHERE date = (SELECT MAX(date) FROM stock_ohlc_indicators)
         ORDER BY rvol DESC
@@ -361,13 +362,13 @@ def run_strategy_scans_and_reports():
         conn,
     )
 
-    # Calculate Trend field based on SMA 8 > SMA 20 > SMA 50 hierarchy
+    # Calculate Trend field based on SMA 20 > 50 and Close > 200 condition
     def compute_trend(row):
-        s8, s20, s50 = row['sma_8'], row['sma_20'], row['sma_50']
-        if pd.notna(s8) and pd.notna(s20) and pd.notna(s50):
-            if s8 > s20 > s50:
+        s20, s50, s200, close = row['sma_20'], row['sma_50'], row['sma_200'], row['close']
+        if pd.notna(s20) and pd.notna(s50) and pd.notna(s200) and pd.notna(close):
+            if (s20 > s50) and (close > s200):
                 return 'Bullish'
-            elif s8 < s20 < s50:
+            elif (s20 < s50) and (close < s200):
                 return 'Bearish'
         return 'Sideways'
 
@@ -445,8 +446,8 @@ def run_strategy_scans_and_reports():
         f.write("• Tracks all NSE futures stocks where Relative Volume (RVOL) > 1.0.\n")
         f.write("• Filter Criteria: Evaluates high market participation based on RVOL and Turnover.\n")
         f.write("• Grouped & Ordered by Trend:\n")
-        f.write("    - Bullish : SMA 8 > SMA 20 > SMA 50\n")
-        f.write("    - Bearish : SMA 8 < SMA 20 < SMA 50\n")
+        f.write("    - Bullish : SMA 20 > SMA 50 AND Close > SMA 200\n")
+        f.write("    - Bearish : SMA 20 < SMA 50 AND Close < SMA 200\n")
         f.write("    - Sideways: Any other moving average alignment\n")
         f.write("--------------------------------------------------\n\n")
         f.write(
