@@ -1,11 +1,8 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-10-20 17:40:56
+ Generated on: 2026-10-21 04:47:56
 =========================================================================================
 
-    symbol    close return_3m          trend   volume
-MOTILALOFS 1,021.00    +8.59% Strong Bullish   957323
-      INFY 1,130.70    +7.95% Strong Bearish 13258477
-       LTM 4,264.90    +7.56% Strong Bearish   850775
-  AXISBANK 1,236.00    +1.06% Strong Bearish 12762071
+symbol    close return_3m          trend  volume
+   LTM 4,309.90    +5.33% Strong Bearish  488217
 =========================================================================================

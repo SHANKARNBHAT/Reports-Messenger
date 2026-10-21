@@ -1,23 +1,21 @@
 =========================================
  STRONG BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-10-20 17:40:56
+ Generated on: 2026-10-21 04:47:56
 =========================================
 
     symbol confirmed_trend
 LAURUSLABS  Strong Bullish
   DIVISLAB  Strong Bullish
+MOTILALOFS  Strong Bullish
        MCX  Strong Bullish
  KOTAKBANK  Strong Bullish
- TATAELXSI  Strong Bearish
-MOTILALOFS  Strong Bullish
       INFY  Strong Bearish
-       LTM  Strong Bearish
-   DRREDDY  Strong Bullish
+ TATAELXSI  Strong Bearish
      WIPRO  Strong Bearish
-  INDHOTEL  Strong Bullish
-      BHEL  Strong Bullish
+   DRREDDY  Strong Bullish
+       LTM  Strong Bearish
 HEROMOTOCO  Strong Bearish
-  FORCEMOT  Strong Bearish
+      SAIL  Strong Bearish
+  INDHOTEL  Strong Bullish
   AXISBANK  Strong Bearish
-  JUBLFOOD  Strong Bearish
 =========================================
