@@ -1,13 +1,15 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-10-21 16:03:57
+ Generated on: 2026-10-22 15:58:20
 =========================================================================================
 
     symbol    close return_3m          trend   volume
-  DIVISLAB 9,190.00   +26.78% Strong Bullish   684975
-MOTILALOFS   985.00   +12.97% Strong Bullish  1022775
-      INFY 1,168.00   +12.21% Strong Bearish 18595036
-     WIPRO   189.17    +8.02% Strong Bearish 37806943
-       LTM 4,298.00    +5.04% Strong Bearish  1420436
-  INDHOTEL   753.00    +3.51% Strong Bullish  5030562
+  DIVISLAB 9,162.00   +23.58% Strong Bullish  1040584
+LAURUSLABS 2,002.50   +16.87% Strong Bullish  1538706
+     TECHM 1,829.10   +16.13% Strong Bullish  4063884
+PERSISTENT 5,740.50    +8.97% Strong Bullish   738946
+   DRREDDY 1,239.00    +7.66% Strong Bullish  2805112
+      INFY 1,153.35    +6.87% Strong Bearish 17003258
+     WIPRO   190.41    +6.65% Strong Bearish 45942579
+  INDHOTEL   782.30    +6.62% Strong Bullish 21078521
 =========================================================================================
