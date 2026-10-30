@@ -1,20 +1,21 @@
 =========================================
  STRONG BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-10-29 17:30:19
+ Generated on: 2026-10-30 17:07:06
 =========================================
 
     symbol confirmed_trend
 LAURUSLABS  Strong Bullish
+   COFORGE  Strong Bullish
+  DIVISLAB  Strong Bullish
  KOTAKBANK  Strong Bullish
    DRREDDY  Strong Bullish
-MOTILALOFS  Strong Bullish
-  DIVISLAB  Strong Bullish
-   COFORGE  Strong Bullish
-       PNB  Strong Bullish
-  INDHOTEL  Strong Bullish
-     TECHM  Strong Bullish
 PERSISTENT  Strong Bullish
+     TECHM  Strong Bullish
+  INDHOTEL  Strong Bullish
+       PNB  Strong Bullish
+     WIPRO  Strong Bullish
    MPHASIS  Strong Bullish
    HCLTECH  Strong Bullish
        TCS  Strong Bullish
+BHARTIARTL  Strong Bullish
 =========================================
