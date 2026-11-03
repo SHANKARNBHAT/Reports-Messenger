@@ -1,15 +1,13 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-02 20:51:58
+ Generated on: 2026-11-03 18:35:34
 =========================================================================================
 
     symbol    close return_3m          trend   volume
-LAURUSLABS 2,405.50   +30.03% Strong Bullish  7913297
-   COFORGE 2,045.00   +16.86% Strong Bullish  6125295
-  DIVISLAB 9,780.00   +16.73% Strong Bullish  1027380
-PERSISTENT 6,048.00    +9.98% Strong Bullish  1108361
-  INDHOTEL   811.65    +8.22% Strong Bullish  5966175
-       PNB   122.85    +7.77% Strong Bullish 22242233
-     WIPRO   198.31    +6.45% Strong Bullish 28869751
-   MPHASIS 2,525.60    +6.12% Strong Bullish   849512
+LAURUSLABS 2,348.00   +27.96% Strong Bullish  3047249
+  DIVISLAB 9,945.50   +18.57% Strong Bullish   914498
+   COFORGE 2,099.00   +18.12% Strong Bullish  3610145
+  INDHOTEL   822.50   +10.99% Strong Bullish  5519711
+PERSISTENT 6,051.00    +9.62% Strong Bullish   835738
+  RELIANCE 1,300.00    +1.56% Strong Bearish 88121121
 =========================================================================================
