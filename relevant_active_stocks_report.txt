@@ -1,9 +1,10 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-04 18:46:48
+ Generated on: 2026-11-05 18:54:54
 =========================================================================================
 
     symbol    close return_3m          trend   volume
-LAURUSLABS 2,323.00   +26.94% Strong Bullish  4026149
-BHARTIARTL 2,065.00    +6.01% Strong Bullish 18603124
+LAURUSLABS 2,323.80   +26.00% Strong Bullish  3219107
+BHARTIARTL 2,067.60    +5.50% Strong Bullish 11272829
+  HDFCBANK   736.70    +0.78% Strong Bearish 50677695
 =========================================================================================
