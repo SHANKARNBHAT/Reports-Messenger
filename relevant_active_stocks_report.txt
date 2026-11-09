@@ -1,8 +1,16 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-08 17:12:42
+ Generated on: 2026-11-09 21:34:15
 =========================================================================================
 
-No overlapping stocks found between Active Stocks and Strong Trend filters.
-
+    symbol     close return_3m          trend   volume
+  DIVISLAB 11,565.50   +34.48% Strong Bullish  2585451
+LAURUSLABS  2,454.00   +32.65% Strong Bullish  4025076
+       PNB    132.17   +11.09% Strong Bullish 49092000
+ ICICIBANK  1,589.00   +10.99% Strong Bullish 27470436
+  HDFCBANK    798.15    +9.49% Strong Bullish 64825158
+  HDFCLIFE    565.40    +5.29% Strong Bearish  2498360
+      NHPC     80.39    +4.61% Strong Bullish 17186865
+BANKBARODA    260.01    +3.59% Strong Bullish 18116054
+MUTHOOTFIN  2,917.60    +1.44% Strong Bearish  1157009
 =========================================================================================
