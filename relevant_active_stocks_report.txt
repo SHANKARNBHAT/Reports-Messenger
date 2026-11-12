@@ -1,16 +1,24 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-11 18:50:15
+ Generated on: 2026-11-12 19:02:32
 =========================================================================================
 
     symbol     close return_3m          trend   volume
-  DIVISLAB 11,565.50   +34.48% Strong Bullish  2586198
-LAURUSLABS  2,454.00   +32.65% Strong Bullish  4026300
-       PNB    132.17   +11.09% Strong Bullish 49116004
- ICICIBANK  1,589.00   +10.99% Strong Bullish 27542158
-  HDFCBANK    798.15    +9.49% Strong Bullish 64826814
-  HDFCLIFE    565.40    +5.29% Strong Bearish  2498411
-      NHPC     80.39    +4.61% Strong Bullish 17190932
-BANKBARODA    260.01    +3.59% Strong Bullish 18123757
-MUTHOOTFIN  2,917.60    +1.44% Strong Bearish  1157303
+  DIVISLAB 11,367.00   +33.73% Strong Bullish  1602464
+LAURUSLABS  2,429.00   +31.18% Strong Bullish  4134062
+ KOTAKBANK    487.70   +24.29% Strong Bullish 23453403
+  INDHOTEL    873.00   +20.96% Strong Bullish  6627915
+       PNB    138.48   +17.77% Strong Bullish 82355494
+ ICICIBANK  1,571.60   +11.71% Strong Bullish 29190011
+  HDFCBANK    806.60   +11.26% Strong Bullish 56398940
+BANKBARODA    275.00   +10.89% Strong Bullish 47147546
+  AXISBANK  1,336.40    +9.38% Strong Bullish 12262001
+  FORCEMOT 19,872.00    +7.58% Strong Bullish   206201
+ HINDPETRO    400.15    +7.09% Strong Bullish 19092653
+    MARICO    925.00    +7.00% Strong Bullish  3094712
+  TVSMOTOR  4,560.00    +5.02% Strong Bullish  1377482
+FEDERALBNK    361.60    +2.95% Strong Bullish 14455891
+ TATASTEEL    189.28    +2.40% Strong Bearish 33811414
+MUTHOOTFIN  2,900.00    +0.85% Strong Bearish   927948
+      NHPC     77.90    +0.52% Strong Bullish 21013755
 =========================================================================================
