@@ -1,24 +1,19 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-12 19:02:32
+ Generated on: 2026-11-13 18:40:41
 =========================================================================================
 
     symbol     close return_3m          trend   volume
-  DIVISLAB 11,367.00   +33.73% Strong Bullish  1602464
-LAURUSLABS  2,429.00   +31.18% Strong Bullish  4134062
- KOTAKBANK    487.70   +24.29% Strong Bullish 23453403
-  INDHOTEL    873.00   +20.96% Strong Bullish  6627915
-       PNB    138.48   +17.77% Strong Bullish 82355494
- ICICIBANK  1,571.60   +11.71% Strong Bullish 29190011
-  HDFCBANK    806.60   +11.26% Strong Bullish 56398940
-BANKBARODA    275.00   +10.89% Strong Bullish 47147546
-  AXISBANK  1,336.40    +9.38% Strong Bullish 12262001
-  FORCEMOT 19,872.00    +7.58% Strong Bullish   206201
- HINDPETRO    400.15    +7.09% Strong Bullish 19092653
-    MARICO    925.00    +7.00% Strong Bullish  3094712
-  TVSMOTOR  4,560.00    +5.02% Strong Bullish  1377482
-FEDERALBNK    361.60    +2.95% Strong Bullish 14455891
- TATASTEEL    189.28    +2.40% Strong Bearish 33811414
-MUTHOOTFIN  2,900.00    +0.85% Strong Bearish   927948
-      NHPC     77.90    +0.52% Strong Bullish 21013755
+MOTILALOFS  1,216.80   +34.65% Strong Bullish  4901418
+ KOTAKBANK    490.40   +25.37% Strong Bullish 27158499
+       PNB    141.79   +20.16% Strong Bullish 62142239
+  HDFCLIFE    597.80   +11.56% Strong Bullish  6593698
+AUROPHARMA  1,807.20   +11.41% Strong Bullish  2274622
+BANKBARODA    276.15   +11.25% Strong Bullish 17175243
+  AXISBANK  1,342.90   +10.31% Strong Bullish  7842954
+  FORCEMOT 19,836.00    +8.34% Strong Bullish   120130
+MUTHOOTFIN  2,932.90    +3.20% Strong Bearish  1077578
+FEDERALBNK    362.50    +3.19% Strong Bullish 10149220
+BANDHANBNK    175.78    +1.58% Strong Bearish 13013149
+   SBILIFE  1,819.50    +1.36% Strong Bearish  1744782
 =========================================================================================
