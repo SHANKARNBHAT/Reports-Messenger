@@ -1,19 +1,11 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-13 18:40:41
+ Generated on: 2026-11-14 17:16:04
 =========================================================================================
 
-    symbol     close return_3m          trend   volume
-MOTILALOFS  1,216.80   +34.65% Strong Bullish  4901418
- KOTAKBANK    490.40   +25.37% Strong Bullish 27158499
-       PNB    141.79   +20.16% Strong Bullish 62142239
-  HDFCLIFE    597.80   +11.56% Strong Bullish  6593698
-AUROPHARMA  1,807.20   +11.41% Strong Bullish  2274622
-BANKBARODA    276.15   +11.25% Strong Bullish 17175243
-  AXISBANK  1,342.90   +10.31% Strong Bullish  7842954
-  FORCEMOT 19,836.00    +8.34% Strong Bullish   120130
-MUTHOOTFIN  2,932.90    +3.20% Strong Bearish  1077578
-FEDERALBNK    362.50    +3.19% Strong Bullish 10149220
-BANDHANBNK    175.78    +1.58% Strong Bearish 13013149
-   SBILIFE  1,819.50    +1.36% Strong Bearish  1744782
+  symbol    close return_3m          trend   volume
+     MCX 3,720.00   +27.14% Strong Bullish  3253739
+     PNB   142.81   +21.73% Strong Bullish 61238582
+HDFCLIFE   592.25    +9.07% Strong Bullish  2996551
+    SBIN 1,080.00    +1.77% Strong Bullish 15886106
 =========================================================================================
