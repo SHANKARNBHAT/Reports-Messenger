@@ -1,37 +1,43 @@
 =========================================
  STRONG BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-11-16 21:11:09
+ Generated on: 2026-11-17 19:59:06
 =========================================
 
     symbol confirmed_trend
-  DIVISLAB  Strong Bullish
-LAURUSLABS  Strong Bullish
 MOTILALOFS  Strong Bullish
-       MCX  Strong Bullish
+  DIVISLAB  Strong Bullish
  KOTAKBANK  Strong Bullish
-  INDHOTEL  Strong Bullish
        PNB  Strong Bullish
+  INDHOTEL  Strong Bullish
+       MCX  Strong Bullish
+LAURUSLABS  Strong Bullish
    DRREDDY  Strong Bullish
    COFORGE  Strong Bullish
-AUROPHARMA  Strong Bullish
- ICICIBANK  Strong Bullish
-BANKBARODA  Strong Bullish
   HDFCBANK  Strong Bullish
-     TECHM  Strong Bullish
   HDFCLIFE  Strong Bullish
-  AXISBANK  Strong Bullish
-PERSISTENT  Strong Bullish
-     WIPRO  Strong Bullish
+ ICICIBANK  Strong Bullish
+     TECHM  Strong Bullish
 BHARTIARTL  Strong Bullish
-    INDIGO  Strong Bullish
-  FORCEMOT  Strong Bullish
+BANKBARODA  Strong Bullish
+PERSISTENT  Strong Bullish
+       ITC  Strong Bullish
+AUROPHARMA  Strong Bullish
+     WIPRO  Strong Bullish
     MARICO  Strong Bullish
-       TCS  Strong Bullish
+  AXISBANK  Strong Bullish
+  FORCEMOT  Strong Bullish
    HCLTECH  Strong Bullish
+    INDIGO  Strong Bullish
  HINDPETRO  Strong Bullish
-  TVSMOTOR  Strong Bullish
-FEDERALBNK  Strong Bullish
-  RELIANCE  Strong Bullish
+       TCS  Strong Bullish
+TATACONSUM  Strong Bullish
       SBIN  Strong Bullish
- TATASTEEL  Strong Bearish
+   SBILIFE  Strong Bearish
+     CANBK  Strong Bullish
+  TVSMOTOR  Strong Bullish
+  RELIANCE  Strong Bullish
+BANDHANBNK  Strong Bearish
+    360ONE  Strong Bullish
+FEDERALBNK  Strong Bullish
+   MPHASIS  Strong Bullish
 =========================================
