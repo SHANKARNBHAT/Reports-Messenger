@@ -1,14 +1,16 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-17 19:59:06
+ Generated on: 2026-11-18 19:30:25
 =========================================================================================
 
-    symbol     close return_3m          trend   volume
-  DIVISLAB 11,080.00   +29.02% Strong Bullish   903749
-       PNB    144.59   +24.11% Strong Bullish 48128826
-LAURUSLABS  2,220.00   +22.38% Strong Bullish  6844445
-  HDFCLIFE    604.50   +12.31% Strong Bullish  3944833
-       ITC    295.10    +9.30% Strong Bullish 49035309
-AUROPHARMA  1,794.00    +9.06% Strong Bullish  1477984
-      SBIN  1,090.50    +3.56% Strong Bullish 16216839
+    symbol    close return_3m          trend   volume
+MOTILALOFS 1,240.25   +31.65% Strong Bullish  2670266
+LAURUSLABS 2,338.00   +29.76% Strong Bullish  4889747
+       PNB   150.00   +27.68% Strong Bullish 58294970
+BANKBARODA   274.89   +12.20% Strong Bullish 17391807
+  AXISBANK 1,369.00   +10.85% Strong Bullish  6982090
+      SBIN 1,108.60    +5.72% Strong Bullish 16311218
+     CANBK   134.00    +3.81% Strong Bullish 54625507
+  TVSMOTOR 4,466.20    +2.41% Strong Bullish   891082
+    360ONE 1,202.85    +1.89% Strong Bullish  1429280
 =========================================================================================
