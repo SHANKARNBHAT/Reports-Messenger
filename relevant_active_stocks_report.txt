@@ -1,13 +1,22 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-19 19:35:16
+ Generated on: 2026-11-20 19:13:45
 =========================================================================================
 
-   symbol    close return_3m          trend   volume
-      PNB   149.57   +26.75% Strong Bullish 35794087
-KOTAKBANK   494.85   +24.54% Strong Bullish 27152458
-      MCX 3,619.00   +16.05% Strong Bullish  2517975
- AXISBANK 1,360.00    +8.71% Strong Bullish  6599539
-     SBIN 1,135.00    +8.30% Strong Bullish 35420675
-   360ONE 1,211.05    +0.67% Strong Bullish  1461208
+    symbol     close return_3m          trend   volume
+       PNB    154.85   +32.86% Strong Bullish 73288634
+MOTILALOFS  1,210.40   +22.26% Strong Bullish  1665869
+BANKBARODA    285.90   +15.75% Strong Bullish 24971034
+  FORCEMOT 20,443.00   +15.37% Strong Bullish   109659
+       ITC    301.00   +11.73% Strong Bullish 26512159
+  AXISBANK  1,380.80   +10.84% Strong Bullish  8348366
+      SBIN  1,156.00   +10.23% Strong Bullish 26528803
+   COFORGE  2,041.00    +7.89% Strong Bullish  3451297
+    INDIGO  5,475.00    +7.14% Strong Bullish  1669739
+  TVSMOTOR  4,601.40    +4.82% Strong Bullish  1603786
+     CANBK    136.03    +4.67% Strong Bullish 28390784
+   HCLTECH  1,332.90    +2.33% Strong Bullish  3500242
+ EICHERMOT  8,058.50    +0.61% Strong Bullish   883416
+    MARUTI 13,589.00    +0.18% Strong Bullish  1371819
+    VOLTAS  1,237.00    +0.16% Strong Bearish  6235827
 =========================================================================================
