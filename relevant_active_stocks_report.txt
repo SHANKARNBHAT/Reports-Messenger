@@ -1,22 +1,29 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-20 19:13:45
+ Generated on: 2026-11-21 18:08:44
 =========================================================================================
 
     symbol     close return_3m          trend   volume
-       PNB    154.85   +32.86% Strong Bullish 73288634
-MOTILALOFS  1,210.40   +22.26% Strong Bullish  1665869
-BANKBARODA    285.90   +15.75% Strong Bullish 24971034
-  FORCEMOT 20,443.00   +15.37% Strong Bullish   109659
-       ITC    301.00   +11.73% Strong Bullish 26512159
-  AXISBANK  1,380.80   +10.84% Strong Bullish  8348366
-      SBIN  1,156.00   +10.23% Strong Bullish 26528803
-   COFORGE  2,041.00    +7.89% Strong Bullish  3451297
-    INDIGO  5,475.00    +7.14% Strong Bullish  1669739
-  TVSMOTOR  4,601.40    +4.82% Strong Bullish  1603786
-     CANBK    136.03    +4.67% Strong Bullish 28390784
-   HCLTECH  1,332.90    +2.33% Strong Bullish  3500242
- EICHERMOT  8,058.50    +0.61% Strong Bullish   883416
-    MARUTI 13,589.00    +0.18% Strong Bullish  1371819
-    VOLTAS  1,237.00    +0.16% Strong Bearish  6235827
+       PNB    155.33   +34.07% Strong Bullish 38879715
+BANKBARODA    287.00   +18.84% Strong Bullish 22500914
+  AXISBANK  1,446.00   +16.99% Strong Bullish 21477017
+  HDFCBANK    846.00   +16.05% Strong Bullish 70110384
+ ICICIBANK  1,640.00   +15.90% Strong Bullish 17973342
+   COFORGE  2,086.70   +11.41% Strong Bullish  9300662
+       ITC    299.10   +10.90% Strong Bullish 28278608
+     TECHM  1,746.20   +10.24% Strong Bullish  3234310
+     CANBK    138.92    +9.13% Strong Bullish 45758492
+TATACONSUM  1,155.90    +8.79% Strong Bullish  2102094
+       MCX  3,535.00    +8.44% Strong Bullish  3010523
+PERSISTENT  6,124.00    +7.55% Strong Bullish  1791480
+   ICICIGI  1,736.00    +7.16% Strong Bullish   786673
+  HDFCLIFE    588.65    +6.46% Strong Bullish  4510623
+APOLLOHOSP  9,200.00    +5.72% Strong Bullish  1412562
+  TVSMOTOR  4,590.00    +5.19% Strong Bullish  1113372
+FEDERALBNK    373.50    +4.40% Strong Bullish  8701089
+ADANIPOWER    211.95    +4.05% Strong Bullish 30818238
+    MARUTI 14,011.00    +2.87% Strong Bullish  1648162
+   HCLTECH  1,344.40    +1.69% Strong Bullish  3594840
+    360ONE  1,208.10    +1.54% Strong Bullish  1133648
+BANDHANBNK    175.07    +0.67% Strong Bearish 12766084
 =========================================================================================
