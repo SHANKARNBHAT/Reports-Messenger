@@ -1,49 +1,48 @@
 =========================================
  STRONG BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-11-23 22:50:54
+ Generated on: 2026-11-24 21:27:24
 =========================================
 
     symbol confirmed_trend
        PNB  Strong Bullish
   DIVISLAB  Strong Bullish
- KOTAKBANK  Strong Bullish
 LAURUSLABS  Strong Bullish
+ KOTAKBANK  Strong Bullish
   INDHOTEL  Strong Bullish
 MOTILALOFS  Strong Bullish
-BANKBARODA  Strong Bullish
-  AXISBANK  Strong Bullish
    DRREDDY  Strong Bullish
+  FORCEMOT  Strong Bullish
+BANKBARODA  Strong Bullish
+   COFORGE  Strong Bullish
+  AXISBANK  Strong Bullish
   HDFCBANK  Strong Bullish
  ICICIBANK  Strong Bullish
-  FORCEMOT  Strong Bullish
-      SBIN  Strong Bullish
-AUROPHARMA  Strong Bullish
-BHARTIARTL  Strong Bullish
-   COFORGE  Strong Bullish
-       ITC  Strong Bullish
      TECHM  Strong Bullish
-    INDIGO  Strong Bullish
-     CANBK  Strong Bullish
-TATACONSUM  Strong Bullish
-       MCX  Strong Bullish
-    MARICO  Strong Bullish
 PERSISTENT  Strong Bullish
+AUROPHARMA  Strong Bullish
+       ITC  Strong Bullish
+       MCX  Strong Bullish
+BHARTIARTL  Strong Bullish
+    MARICO  Strong Bullish
+      SBIN  Strong Bullish
    ICICIGI  Strong Bullish
- HINDPETRO  Strong Bullish
-  HDFCLIFE  Strong Bullish
-APOLLOHOSP  Strong Bullish
-  TVSMOTOR  Strong Bullish
-  RELIANCE  Strong Bullish
-FEDERALBNK  Strong Bullish
-BAJFINANCE  Strong Bullish
-ADANIPOWER  Strong Bullish
        TCS  Strong Bullish
-       M&M  Strong Bullish
- DELHIVERY  Strong Bullish
-    MARUTI  Strong Bullish
+TATACONSUM  Strong Bullish
+    INDIGO  Strong Bullish
+APOLLOHOSP  Strong Bullish
+     CANBK  Strong Bullish
+FEDERALBNK  Strong Bullish
    HCLTECH  Strong Bullish
-    360ONE  Strong Bullish
-  CHOLAFIN  Strong Bullish
+ HINDPETRO  Strong Bullish
+  RELIANCE  Strong Bullish
+  TVSMOTOR  Strong Bullish
+    MARUTI  Strong Bullish
+ DELHIVERY  Strong Bullish
+   MPHASIS  Strong Bullish
  EICHERMOT  Strong Bullish
-BANDHANBNK  Strong Bearish
+       M&M  Strong Bullish
+     DABUR  Strong Bearish
+ADANIPOWER  Strong Bullish
+BAJFINANCE  Strong Bullish
+    RADICO  Strong Bullish
 =========================================

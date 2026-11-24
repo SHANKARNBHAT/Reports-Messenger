@@ -1,29 +1,28 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-23 22:50:54
+ Generated on: 2026-11-24 21:27:24
 =========================================================================================
 
     symbol     close return_3m          trend   volume
-       PNB    155.33   +34.07% Strong Bullish 38879715
-BANKBARODA    287.00   +18.84% Strong Bullish 22500914
-  AXISBANK  1,446.00   +16.99% Strong Bullish 21477017
-  HDFCBANK    846.00   +16.05% Strong Bullish 70110384
- ICICIBANK  1,640.00   +15.90% Strong Bullish 17973342
-   COFORGE  2,086.70   +11.41% Strong Bullish  9300662
-       ITC    299.10   +10.90% Strong Bullish 28278608
-     TECHM  1,746.20   +10.24% Strong Bullish  3234310
-     CANBK    138.92    +9.13% Strong Bullish 45758492
-TATACONSUM  1,155.90    +8.79% Strong Bullish  2102094
-       MCX  3,535.00    +8.44% Strong Bullish  3010523
-PERSISTENT  6,124.00    +7.55% Strong Bullish  1791480
-   ICICIGI  1,736.00    +7.16% Strong Bullish   786673
-  HDFCLIFE    588.65    +6.46% Strong Bullish  4510623
-APOLLOHOSP  9,200.00    +5.72% Strong Bullish  1412562
-  TVSMOTOR  4,590.00    +5.19% Strong Bullish  1113372
-FEDERALBNK    373.50    +4.40% Strong Bullish  8701089
-ADANIPOWER    211.95    +4.05% Strong Bullish 30818238
-    MARUTI 14,011.00    +2.87% Strong Bullish  1648162
-   HCLTECH  1,344.40    +1.69% Strong Bullish  3594840
-    360ONE  1,208.10    +1.54% Strong Bullish  1133648
-BANDHANBNK    175.07    +0.67% Strong Bearish 12766084
+  DIVISLAB 11,203.00   +28.11% Strong Bullish  1240322
+MOTILALOFS  1,235.00   +22.10% Strong Bullish  1710891
+BANKBARODA    275.58   +14.35% Strong Bullish 14986475
+   COFORGE  2,142.30   +13.18% Strong Bullish  4442752
+  AXISBANK  1,388.60   +12.44% Strong Bullish 10853616
+  HDFCBANK    817.80   +12.41% Strong Bullish 55628667
+ ICICIBANK  1,585.50   +11.44% Strong Bullish 22243169
+     TECHM  1,777.50   +11.10% Strong Bullish  3180662
+PERSISTENT  6,282.50   +11.10% Strong Bullish  1271394
+       ITC    301.00   +10.91% Strong Bullish 27512525
+   ICICIGI  1,742.60    +7.83% Strong Bullish   931122
+       TCS  2,460.00    +7.13% Strong Bullish  7386320
+APOLLOHOSP  9,257.00    +4.14% Strong Bullish   790698
+     CANBK    133.75    +3.84% Strong Bullish 35129374
+FEDERALBNK    359.80    +3.70% Strong Bullish 15371120
+   HCLTECH  1,364.30    +3.69% Strong Bullish  3981800
+    MARUTI 14,010.00    +2.43% Strong Bullish  1251978
+   MPHASIS  2,468.40    +1.50% Strong Bullish   767419
+ EICHERMOT  8,172.50    +1.46% Strong Bullish   760976
+     DABUR    399.00    +1.00% Strong Bearish  6624301
+ADANIPOWER    207.90    +0.76% Strong Bullish 34334345
 =========================================================================================
