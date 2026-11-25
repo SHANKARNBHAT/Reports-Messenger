@@ -1,6 +1,6 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-24 21:27:24
+ Generated on: 2026-11-25 20:35:04
 =========================================================================================
 
     symbol     close return_3m          trend   volume
