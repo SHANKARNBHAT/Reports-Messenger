@@ -1,48 +1,54 @@
 =========================================
  STRONG BULLISH & BEARISH STOCKS (3M+)
- Generated on: 2026-11-25 20:35:04
+ Generated on: 2026-11-26 20:26:01
 =========================================
 
     symbol confirmed_trend
-       PNB  Strong Bullish
-  DIVISLAB  Strong Bullish
 LAURUSLABS  Strong Bullish
- KOTAKBANK  Strong Bullish
+  DIVISLAB  Strong Bullish
+       PNB  Strong Bullish
   INDHOTEL  Strong Bullish
+ KOTAKBANK  Strong Bullish
 MOTILALOFS  Strong Bullish
    DRREDDY  Strong Bullish
   FORCEMOT  Strong Bullish
-BANKBARODA  Strong Bullish
-   COFORGE  Strong Bullish
-  AXISBANK  Strong Bullish
   HDFCBANK  Strong Bullish
  ICICIBANK  Strong Bullish
      TECHM  Strong Bullish
-PERSISTENT  Strong Bullish
-AUROPHARMA  Strong Bullish
        ITC  Strong Bullish
-       MCX  Strong Bullish
-BHARTIARTL  Strong Bullish
-    MARICO  Strong Bullish
-      SBIN  Strong Bullish
-   ICICIGI  Strong Bullish
-       TCS  Strong Bullish
+BANKBARODA  Strong Bullish
+AUROPHARMA  Strong Bullish
 TATACONSUM  Strong Bullish
+  AXISBANK  Strong Bullish
+    MARICO  Strong Bullish
+BHARTIARTL  Strong Bullish
+       TCS  Strong Bullish
+     DABUR  Strong Bullish
+   COFORGE  Strong Bullish
+PERSISTENT  Strong Bullish
     INDIGO  Strong Bullish
-APOLLOHOSP  Strong Bullish
-     CANBK  Strong Bullish
-FEDERALBNK  Strong Bullish
+   ICICIGI  Strong Bullish
+  HDFCLIFE  Strong Bullish
+      SBIN  Strong Bullish
+ MAXHEALTH  Strong Bullish
+       MCX  Strong Bullish
+     WIPRO  Strong Bullish
    HCLTECH  Strong Bullish
- HINDPETRO  Strong Bullish
+APOLLOHOSP  Strong Bullish
+HINDUNILVR  Strong Bullish
   RELIANCE  Strong Bullish
-  TVSMOTOR  Strong Bullish
-    MARUTI  Strong Bullish
- DELHIVERY  Strong Bullish
    MPHASIS  Strong Bullish
+    MARUTI  Strong Bullish
+BAJFINANCE  Strong Bullish
+ HINDPETRO  Strong Bullish
  EICHERMOT  Strong Bullish
        M&M  Strong Bullish
-     DABUR  Strong Bearish
-ADANIPOWER  Strong Bullish
-BAJFINANCE  Strong Bullish
+  TVSMOTOR  Strong Bullish
+FEDERALBNK  Strong Bullish
+     CANBK  Strong Bullish
+ DELHIVERY  Strong Bullish
+HEROMOTOCO  Strong Bullish
+     CIPLA  Strong Bullish
     RADICO  Strong Bullish
+ SUNPHARMA  Strong Bullish
 =========================================
