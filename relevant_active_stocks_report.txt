@@ -1,30 +1,22 @@
 =========================================================================================
  🎯 RELEVANT ACTIVE STOCKS (INTERSECTION OF ACTIVE & STRONG TRENDS)
- Generated on: 2026-11-26 20:26:01
+ Generated on: 2026-11-27 20:10:56
 =========================================================================================
 
-    symbol     close return_3m          trend   volume
-   DRREDDY  1,398.00   +18.27% Strong Bullish  2484980
-  FORCEMOT 20,392.00   +17.19% Strong Bullish    97032
-  HDFCBANK    846.20   +16.36% Strong Bullish 48187313
- ICICIBANK  1,640.00   +14.69% Strong Bullish 18982380
-       ITC    309.25   +14.43% Strong Bullish 41071647
-AUROPHARMA  1,843.00   +13.56% Strong Bullish  1537135
-TATACONSUM  1,185.80   +13.25% Strong Bullish  3343686
-  AXISBANK  1,418.10   +13.00% Strong Bullish  9661584
-       TCS  2,517.30   +10.89% Strong Bullish  5001661
-     DABUR    430.00    +9.64% Strong Bullish 17385340
-   COFORGE  2,060.00    +9.57% Strong Bullish  3923087
-    INDIGO  5,720.00    +8.94% Strong Bullish  1595695
-   ICICIGI  1,736.60    +8.75% Strong Bullish   855370
-  HDFCLIFE    601.30    +8.73% Strong Bullish  8379402
- MAXHEALTH  1,076.30    +7.09% Strong Bullish  6110141
-APOLLOHOSP  9,300.00    +6.09% Strong Bullish   619610
-HINDUNILVR  2,141.80    +5.98% Strong Bullish  5125327
-   MPHASIS  2,532.90    +5.54% Strong Bullish   945566
-BAJFINANCE  1,131.35    +4.27% Strong Bullish 10260906
- EICHERMOT  8,336.00    +3.75% Strong Bullish   893930
-FEDERALBNK    356.20    +3.16% Strong Bullish  8007097
-HEROMOTOCO  5,751.50    +2.80% Strong Bullish  1099983
-     CIPLA  1,433.20    +2.17% Strong Bullish  2838283
+    symbol    close return_3m          trend   volume
+LAURUSLABS 2,505.00   +29.83% Strong Bullish  3168279
+  HDFCBANK   862.00   +21.24% Strong Bullish 70517167
+       MCX 3,835.00   +17.46% Strong Bullish  4854647
+       TCS 2,640.30   +17.43% Strong Bullish  5534593
+   HCLTECH 1,468.60   +14.56% Strong Bullish  4996290
+  AXISBANK 1,408.00   +12.10% Strong Bullish  8710226
+     WIPRO   196.54   +11.42% Strong Bullish 22755275
+  HDFCLIFE   594.40    +8.47% Strong Bullish  5150210
+      INFY 1,183.00    +6.50% Strong Bullish 16676971
+HINDUNILVR 2,130.80    +6.06% Strong Bullish  2901988
+   COFORGE 2,000.00    +5.16% Strong Bullish  7477323
+HEROMOTOCO 5,789.00    +4.31% Strong Bullish   763711
+FEDERALBNK   356.85    +3.49% Strong Bullish  8365892
+     CIPLA 1,450.00    +2.11% Strong Bullish  1913011
+    360ONE 1,210.00    +0.50% Strong Bullish  1416807
 =========================================================================================
